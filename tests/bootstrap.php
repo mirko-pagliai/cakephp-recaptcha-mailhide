@@ -120,7 +120,7 @@ Configure::write('Session', [
 /**
  * Loads plugins
  */
-Plugin::load('RecaptchaMailhide', ['bootstrap' => false, 'path' => ROOT]);
+Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
 
 DispatcherFactory::add('Routing');
 DispatcherFactory::add('ControllerFactory');
