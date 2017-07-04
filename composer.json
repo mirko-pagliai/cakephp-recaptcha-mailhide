@@ -10,7 +10,8 @@
     }],
     "require": {
         "php": ">=5.5.9",
-        "cakephp/cakephp": "~3.2"
+        "cakephp/cakephp": "~3.2",
+        "crabstudio/recaptcha": "^2.0"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "2.*",
