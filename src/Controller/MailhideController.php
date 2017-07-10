@@ -20,15 +20,34 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide
  */
-use Cake\Routing\Router;
-use Cake\Routing\Route\DashedRoute;
+namespace RecaptchaMailhide\Controller;
 
-Router::plugin(RECAPTCHA_MAILHIDE, ['path' => '/'], function ($routes) {
-    $routes->connect(
-        '/mailhide',
-        ['controller' => 'Mailhide', 'action' => 'display'],
-        ['_name' => 'mailhide']
-    );
+use App\Controller\AppController;
+use RecaptchaMailhide\Utility\Security;
 
-    $routes->fallbacks(DashedRoute::class);
-});
+/**
+ * MailhideController
+ */
+class MailhideController extends AppController
+{
+    /**
+     * Display action
+     * @return void
+     * @uses \RecaptchaMailhide\Utility\Security::decryptMail()
+     */
+    public function display()
+    {
+        $mail = $this->request->getQuery('mail');
+
+        if (!$mail) {
+        }
+
+        if ($this->request->is('post')) {
+            if ($this->Recaptcha->verify()) {
+                $this->set('mail', Security::decryptMail($mail));
+            }
+        }
+
+        $this->viewBuilder()->setLayout(RECAPTCHA_MAILHIDE . '.default');
+    }
+}
