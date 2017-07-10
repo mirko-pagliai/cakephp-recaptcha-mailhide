@@ -45,7 +45,7 @@ class Security extends CakeSecurity
             $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey');
         }
 
-        return parent::decrypt(rawurldecode($mail), $key, $hmacSalt);
+        return parent::decrypt(base64_decode($mail), $key, $hmacSalt);
     }
 
     /**
@@ -63,6 +63,6 @@ class Security extends CakeSecurity
             $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey');
         }
 
-        return rawurlencode(parent::encrypt($mail, $key, $hmacSalt));
+        return base64_encode(parent::encrypt($mail, $key, $hmacSalt));
     }
 }
