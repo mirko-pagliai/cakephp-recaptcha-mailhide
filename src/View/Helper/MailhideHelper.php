@@ -58,22 +58,22 @@ class MailhideHelper extends Helper
      *  clear email address will be displayed
      * @param string $title Link title. If it is the email address, it will be
      *  obfuscated
-     * @param string $email Email for which you want to create the link. It
+     * @param string $mail Email for which you want to create the link. It
      *  will not be shown clearly
      * @param array $options Array of options and HTML attributes
      * @return string An `<a />` element
      * @uses \RecaptchaMailhide\Utility\Security::encryptMail()
      * @uses _obfuscate()
      */
-    public function link($title, $email, array $options = [])
+    public function link($title, $mail, array $options = [])
     {
         //Obfuscates the title, if the title is the email address
         if (filter_var($title, FILTER_VALIDATE_EMAIL)) {
             $title = $this->_obfuscate($title);
         }
 
-        $email = Security::encryptMail($email);
-        $url = Router::url(['_name' => 'mailhide', $email], true);
+        $mail = Security::encryptMail($mail);
+        $url = Router::url(['_name' => 'mailhide', '?' => compact('mail')], true);
 
         $options['escape'] = false;
         $options['onClick'] = 'window.open(\'' . $url . '\',\'' . $title . '\',\'resizable,height=547,width=334\'); return false;';
