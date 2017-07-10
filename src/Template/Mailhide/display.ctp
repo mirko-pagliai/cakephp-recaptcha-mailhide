@@ -27,7 +27,7 @@
         <p class="small">
             <?= __d('recaptcha-mailhide', 'Fill out the reCAPTCHA form to view the e-mail address') ?>
         </p>
-        
+
         <?php
             echo $this->Form->create();
             echo $this->Recaptcha->display();
@@ -35,6 +35,7 @@
             echo $this->Form->end();
         ?>
     <?php else : ?>
-        <p><?= __d('recaptcha-mailhide', 'The email address you were looking for is: {0}', $mail) ?></p>
+        <p><?= __d('recaptcha-mailhide', 'The email address you were looking for is:') ?></p>
+        <p><?= $this->Html->link($mail, sprintf('mailto:%s', $mail)) ?></p>
     <?php endif; ?>
 </div>

@@ -102,26 +102,19 @@ Cache::setConfig([
 ]);
 
 // Ensure default test connection is defined
-if (!getenv('db_dsn')) {
-    putenv('db_dsn=sqlite://127.0.0.1/' . TMP . 'debug_kit_test.sqlite');
-}
-$config = [
-    'url' => getenv('db_dsn'),
+ConnectionManager::setConfig('test', [
+    'url' => 'db_dsn=sqlite://127.0.0.1/' . TMP . 'debug_kit_test.sqlite',
     'timezone' => 'UTC',
-];
-
-// Use the test connection for 'debug_kit' as well.
-ConnectionManager::setConfig('test', $config);
-
-Configure::write('Session', [
-    'defaults' => 'php'
 ]);
+
+Configure::write('Session', ['defaults' => 'php']);
 
 /**
  * Loads plugins
  */
 Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
 Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
+Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha']);
 Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
 
 DispatcherFactory::add('Routing');

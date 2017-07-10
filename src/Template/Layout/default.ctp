@@ -39,7 +39,7 @@
         ?>
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container-fluid text-center">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>

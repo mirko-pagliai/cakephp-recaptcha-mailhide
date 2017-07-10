@@ -42,10 +42,8 @@ class MailhideController extends AppController
         if (!$mail) {
         }
 
-        if ($this->request->is('post')) {
-            if ($this->Recaptcha->verify()) {
-                $this->set('mail', Security::decryptMail($mail));
-            }
+        if ($this->request->is('post') && $this->Recaptcha->verify()) {
+            $this->set('mail', Security::decryptMail($mail));
         }
 
         $this->viewBuilder()->setLayout(RECAPTCHA_MAILHIDE . '.default');

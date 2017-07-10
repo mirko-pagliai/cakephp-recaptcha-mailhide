@@ -25,7 +25,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "RecaptchaMailhide\\Test\\": "tests"
+            "RecaptchaMailhide\\Test\\": "tests",
+            "App\\": "tests/test_app/TestApp"
         }
     }
 }
