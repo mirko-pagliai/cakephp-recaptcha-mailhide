@@ -22,7 +22,9 @@
  */
 namespace RecaptchaMailhide\View\Helper;
 
+use Cake\Routing\Router;
 use Cake\View\Helper;
+use RecaptchaMailhide\Utility\Security;
 
 /**
  * MailhideHelper
@@ -30,11 +32,17 @@ use Cake\View\Helper;
 class MailhideHelper extends Helper
 {
     /**
-     * Method to obfuscate an email address
+     * Helpers
+     * @var array
+     */
+    public $helpers = ['Html'];
+
+    /**
+     * Internal method to obfuscate an email address
      * @param string $mail Mail address
      * @return string
      */
-    public function obfuscate($mail)
+    protected function _obfuscate($mail)
     {
         return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches) {
             $lenght = floor(strlen($matches[1]) / 2);
@@ -43,5 +51,35 @@ class MailhideHelper extends Helper
 
             return $name . $matches[2];
         }, $mail);
+    }
+
+    /**
+     * Creates a link for the page where you enter the code and from which the
+     *  clear email address will be displayed
+     * @param string $title Link title. If it is the email address, it will be
+     *  obfuscated
+     * @param string $email Email for which you want to create the link. It
+     *  will not be shown clearly
+     * @param array $options Array of options and HTML attributes
+     * @return string An `<a />` element
+     * @uses \RecaptchaMailhide\Utility\Security::encryptMail()
+     * @uses _obfuscate()
+     */
+    public function link($title, $email, array $options = [])
+    {
+        //Obfuscates the title, if the title is the email address
+        if (filter_var($title, FILTER_VALIDATE_EMAIL)) {
+            $title = $this->_obfuscate($title);
+        }
+
+        $email = Security::encryptMail($email);
+        $url = Router::url(['_name' => 'mailhide', $email], true);
+
+        $options['escape'] = false;
+        $options['onClick'] = 'window.open(\'' . $url . '\',\'' . $title . '\',\'resizable,height=547,width=334\'); return false;';
+
+        $options += ['class' => 'recaptcha-mailhide', 'title' => $title];
+
+        return $this->Html->link($title, $url, $options);
     }
 }

@@ -25,12 +25,15 @@ namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
+use Reflection\ReflectionTrait;
 
 /**
  * MailhideHelperTest class
  */
 class MailhideHelperTest extends TestCase
 {
+    use ReflectionTrait;
+
     /**
      * @var \RecaptchaMailhide\View\Helper\MailhideHelper
      */
@@ -61,26 +64,80 @@ class MailhideHelperTest extends TestCase
     }
 
     /**
-     * Test for `obfuscate()` method
-     * @return void
+     * Internal method to get the "onClick" regex
+     * @param string $title Link title
+     * @return string
+     */
+    protected function getOnClickRegex($title)
+    {
+        return sprintf(
+            preg_quote('window.open(\'%s\',\'' . $title . '\',\'resizable,height=547,width=334\'); return false;', '/'),
+            '[^\']+',
+            '\d+',
+            '\d+'
+        );
+    }
+
+    /**
+     * Test for `_obfuscate()` method
      * @test
      */
     public function testObfuscate()
     {
-        $result = $this->Mailhide->obfuscate('myname@mymail.com');
-        $expected = 'myn***@mymail.com';
-        $this->assertEquals($expected, $result);
+        foreach ([
+            'myname@mymail.com' => 'myn***@mymail.com',
+            'firstandlastname@example.it' => 'firstand********@example.it',
+            'invalidmail' => 'inval*****',
+            '@invalidmail' => '@invalidmail',
+        ] as $mail => $expected) {
+            $result = $this->invokeMethod($this->Mailhide, '_obfuscate', [$mail]);
+            $this->assertEquals($expected, $result);
+        }
+    }
 
-        $result = $this->Mailhide->obfuscate('firstnameandlastname@example.it');
-        $expected = 'firstnamea**********@example.it';
-        $this->assertEquals($expected, $result);
+    /**
+     * Test for `link()` method
+     * @test
+     */
+    public function testLink()
+    {
+        $result = $this->Mailhide->link('My address', 'test@example.com');
+        $expected = [
+            'a' => [
+                'href',
+                'onClick' => 'preg:/' . $this->getOnClickRegex('My address') . '/',
+                'class' => 'recaptcha-mailhide',
+                'title' => 'My address',
+            ],
+            'My address',
+            '/a',
+        ];
+        $this->assertHtml($expected, $result);
 
-        $result = $this->Mailhide->obfuscate('invalidmail');
-        $expected = 'inval*****';
-        $this->assertEquals($expected, $result);
+        $result = $this->Mailhide->link('test@example.com', 'test@example.com');
+        $expected = [
+            'a' => [
+                'href',
+                'onClick' => 'preg:/' . $this->getOnClickRegex('te**@example.com') . '/',
+                'class' => 'recaptcha-mailhide',
+                'title' => 'te**@example.com',
+            ],
+            'te**@example.com',
+            '/a',
+        ];
+        $this->assertHtml($expected, $result);
 
-        $result = $this->Mailhide->obfuscate('@invalidmail');
-        $expected = '@invalidmail';
-        $this->assertEquals($expected, $result);
+        $result = $this->Mailhide->link('My address', 'test@example.com', ['class' => 'custom-class', 'title' => 'custom title']);
+        $expected = [
+            'a' => [
+                'href',
+                'onClick' => 'preg:/' . $this->getOnClickRegex('My address') . '/',
+                'class' => 'custom-class',
+                'title' => 'custom title',
+            ],
+            'My address',
+            '/a',
+        ];
+        $this->assertHtml($expected, $result);
     }
 }
