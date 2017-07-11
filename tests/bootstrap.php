@@ -48,7 +48,6 @@ define('CONFIG', APP . 'config' . DS);
 define('CACHE', TMP);
 define('LOGS', TMP);
 define('SESSIONS', TMP . 'sessions' . DS);
-define('UPLOADS', TMP . 'uploads' . DS);
 
 //@codingStandardsIgnoreStart
 @mkdir(LOGS);
