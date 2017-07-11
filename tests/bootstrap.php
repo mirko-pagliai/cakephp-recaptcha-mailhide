@@ -55,7 +55,6 @@ define('SESSIONS', TMP . 'sessions' . DS);
 @mkdir(CACHE);
 @mkdir(CACHE . 'views');
 @mkdir(CACHE . 'models');
-@mkdir(UPLOADS);
 //@codingStandardsIgnoreEnd
 
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
