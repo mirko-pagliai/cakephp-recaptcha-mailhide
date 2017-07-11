@@ -24,6 +24,7 @@ namespace RecaptchaMailhide\Controller;
 
 use App\Controller\AppController;
 use Cake\Network\Exception\BadRequestException;
+use Cake\Network\Exception\InternalErrorException;
 use RecaptchaMailhide\Utility\Security;
 
 /**
@@ -35,10 +36,15 @@ class MailhideController extends AppController
      * Display action
      * @return void
      * @throws BadRequestException
+     * @throws InternalErrorException
      * @uses \RecaptchaMailhide\Utility\Security::decryptMail()
      */
     public function display()
     {
+        if (!in_array('Recaptcha', $this->components()->loaded())) {
+            throw new InternalErrorException(__d('cakephp-recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'));
+        }
+
         $mail = $this->request->getQuery('mail');
 
         if (!$mail) {

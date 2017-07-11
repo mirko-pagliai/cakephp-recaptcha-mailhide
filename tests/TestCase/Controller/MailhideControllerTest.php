@@ -51,6 +51,13 @@ class MailhideControllerTest extends IntegrationTestCase
                 ->will($this->returnValue(true));
         }
 
+        //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the
+        //  `Recaptcha` component
+        if ($this->getName() === 'testDisplayMissingRecaptchaComponent') {
+            $controller->components()->unload('Recaptcha');
+            unset($controller->Recaptcha);
+        }
+
         return parent::controllerSpy($event, $controller);
     }
 
@@ -125,5 +132,16 @@ class MailhideControllerTest extends IntegrationTestCase
         $this->post($url, ['g-recaptcha-response' => 'foo']);
         $this->assertResponseError();
         $this->assertResponseContains('Invalid mail value');
+    }
+
+    /**
+     * Test for `display()` method, missing `Recaptcha` component
+     * @test
+     */
+    public function testDisplayMissingRecaptchaComponent()
+    {
+        $this->get($this->getDisplayActionUrl('test@example.com'));
+        $this->assertResponseFailure();
+        $this->assertResponseContains('Missing Recaptcha component');
     }
 }
