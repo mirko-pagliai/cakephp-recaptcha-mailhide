@@ -112,7 +112,7 @@ Configure::write('Session', ['defaults' => 'php']);
  */
 Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
 Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
-Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha']);
+Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
 
 DispatcherFactory::add('Routing');
