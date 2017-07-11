@@ -100,4 +100,14 @@ class MailhideControllerTest extends IntegrationTestCase
         $this->assertResponseOk();
         $this->assertResponseContains($mail);
     }
+
+    /**
+     * Test for `display()` method
+     * @test
+     */
+    public function testDisplayMissingMail()
+    {
+        $this->get(['_name' => 'mailhide']);
+        $this->assertResponseError();
+    }
 }

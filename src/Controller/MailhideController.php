@@ -23,6 +23,7 @@
 namespace RecaptchaMailhide\Controller;
 
 use App\Controller\AppController;
+use Cake\Network\Exception\BadRequestException;
 use RecaptchaMailhide\Utility\Security;
 
 /**
@@ -33,6 +34,7 @@ class MailhideController extends AppController
     /**
      * Display action
      * @return void
+     * @throws BadRequestException
      * @uses \RecaptchaMailhide\Utility\Security::decryptMail()
      */
     public function display()
@@ -40,6 +42,7 @@ class MailhideController extends AppController
         $mail = $this->request->getQuery('mail');
 
         if (!$mail) {
+            throw new BadRequestException(__d('cakephp-recaptcha-mailhide', 'Missing mail value'));
         }
 
         if ($this->request->is('post') && $this->Recaptcha->verify()) {
