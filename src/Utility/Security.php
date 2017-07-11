@@ -31,7 +31,7 @@ use Cake\Utility\Security as CakeSecurity;
 class Security extends CakeSecurity
 {
     /**
-     * Decrypts an email address
+     * Decrypts and decodes an email address
      * @param string $mail Email address
      * @param string $key The 256 bit/32 byte key to use as a cipher key. Leave
      *  `null` to use `Security.salt`
@@ -49,7 +49,7 @@ class Security extends CakeSecurity
     }
 
     /**
-     * Encrypts an email address
+     * Encrypts and encodes an email address
      * @param string $mail Email address
      * @param string $key The 256 bit/32 byte key to use as a cipher key. Leave
      *  `null` to use `Security.salt`
