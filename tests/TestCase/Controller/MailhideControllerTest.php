@@ -124,7 +124,6 @@ class MailhideControllerTest extends IntegrationTestCase
 
         $this->post($url, ['g-recaptcha-response' => 'foo']);
         $this->assertResponseError();
-        $this->assertResponseNotContains($mail);
         $this->assertResponseContains('Invalid mail value');
     }
 }
