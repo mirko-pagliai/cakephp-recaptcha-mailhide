@@ -46,7 +46,13 @@ class MailhideController extends AppController
         }
 
         if ($this->request->is('post') && $this->Recaptcha->verify()) {
-            $this->set('mail', Security::decryptMail($mail));
+            $mail = Security::decryptMail($mail);
+
+            if (!$mail) {
+                throw new BadRequestException(__d('cakephp-recaptcha-mailhide', 'Invalid mail value'));
+            }
+
+            $this->set(compact('mail'));
         }
 
         $this->viewBuilder()->setLayout(RECAPTCHA_MAILHIDE . '.default');
