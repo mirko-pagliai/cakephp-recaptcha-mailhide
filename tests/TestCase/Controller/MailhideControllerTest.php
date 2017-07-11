@@ -44,12 +44,11 @@ class MailhideControllerTest extends IntegrationTestCase
         if ($this->getName() === 'testDisplayVerifyTrue') {
             $controller->Recaptcha = $this->getMockBuilder(get_class($controller->Recaptcha))
                 ->setConstructorArgs([new ComponentRegistry($controller), $controller->Recaptcha->getConfig()])
-                ->setMethods(['apiCall'])
+                ->setMethods(['verify'])
                 ->getMock();
 
-            $controller->Recaptcha->expects($this->once())
-                ->method('apiCall')
-                ->will($this->returnValue('{"success":true}'));
+            $controller->Recaptcha->method('verify')
+                ->will($this->returnValue(true));
         }
 
         return parent::controllerSpy($event, $controller);
@@ -57,8 +56,8 @@ class MailhideControllerTest extends IntegrationTestCase
 
     /**
      * Internal method to the url of the `display()` action
-     * @param type $mail
-     * @return type
+     * @param string $mail
+     * @return array
      */
     protected function getDisplayActionUrl($mail)
     {
