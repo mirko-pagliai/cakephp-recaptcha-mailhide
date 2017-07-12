@@ -17,7 +17,7 @@ Then you have to edit `APP/config/bootstrap.php` to load the plugin:
 
     Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
 
-Remember, you must first load the **crabstudio/Recaptcha** plugin. For example:
+Remember, **you must first load** the *crabstudio/Recaptcha* plugin. For example:
 
     Plugin::load('Recaptcha');
     Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
@@ -31,8 +31,8 @@ Then you also need to set up a key to encrypt/decrypt email addresses:
 
 ## Configuration
 First, you have to load the `Recaptcha` component provided by the
-**crabstudio/Recaptcha** plugin, as described [here](https://github.com/crabstudio/Recaptcha#load-component-and-configure).  
-The component must be loaded into the `initialize()` method of your
+*crabstudio/Recaptcha* plugin, as described [here](https://github.com/crabstudio/Recaptcha#load-component-and-configure).  
+The component **must be loaded** inside the `initialize()` method of your
 `AppController` class.
 
 For more information on how to load the component, please refer to the 
@@ -59,7 +59,7 @@ You can also use the email address as the title of the link. Example:
 
     echo $this->Mailhide->link('myname@mymail.com', 'myname@mymail.com');
 
-In this case, the email will be obfuscated (**myn***@mymail.com**) to be shown
+In this case, the email will be obfuscated (*myn\*\*\*@mymail.com*) to be shown
 as the title of the link.
 
 The third parameter of the method can be used for link options. Example:
