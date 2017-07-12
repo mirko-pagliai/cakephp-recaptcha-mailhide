@@ -3,7 +3,7 @@
     "description": "A CakePHP plugin that allows you to hide email addresses using reCAPTCHA",
     "homepage": "https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide",
     "type": "cakephp-plugin",
-    "license": "AGPL",
+    "license": "MIT",
     "authors": [{
         "name": "Mirko Pagliai",
         "email": "mirko.pagliai@gmail.com"
