@@ -1,0 +1,41 @@
+# LANGUAGE translation of cakephp-recaptcha-mailhide
+# Copyright 2017 Mirko Pagliai <mirko.pagliai@gmail.com>
+#
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2017-07-12 14:31+0200\n"
+"PO-Revision-Date: 2017-07-12 14:34+0100\n"
+"Last-Translator: Mirko Pagliai <mirko.pagliai@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: \n"
+"Language-Team: Italian <>\n"
+"Language: it\n"
+
+#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Controller/MailhideController.php:45
+msgid "Missing {0} component"
+msgstr "Il componente {0} non è presente"
+
+#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Controller/MailhideController.php:51
+msgid "Missing mail value"
+msgstr "Valore mail mancante"
+
+#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Controller/MailhideController.php:58
+msgid "Invalid mail value"
+msgstr "Valore mail invalido"
+
+#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Template/Mailhide/display.ctp:28
+msgid "Fill out the reCAPTCHA form to view the e-mail address"
+msgstr "Compila il modulo reCAPTCHA per visualizzare l'indirizzo e-mail"
+
+#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Template/Mailhide/display.ctp:34
+msgid "Show me the email address"
+msgstr "Mostrami l'indirizzo email"
+
+#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Template/Mailhide/display.ctp:38
+msgid "The email address you were looking for is:"
+msgstr "L'indirizzo email che stavi cercando è:"
+
+

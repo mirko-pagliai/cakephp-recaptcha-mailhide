@@ -42,20 +42,20 @@ class MailhideController extends AppController
     public function display()
     {
         if (!in_array('Recaptcha', $this->components()->loaded())) {
-            throw new InternalErrorException(__d('cakephp-recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'));
+            throw new InternalErrorException(__d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'));
         }
 
         $mail = $this->request->getQuery('mail');
 
         if (!$mail) {
-            throw new BadRequestException(__d('cakephp-recaptcha-mailhide', 'Missing mail value'));
+            throw new BadRequestException(__d('recaptcha-mailhide', 'Missing mail value'));
         }
 
         if ($this->request->is('post') && $this->Recaptcha->verify()) {
             $mail = Security::decryptMail($mail);
 
             if (!$mail) {
-                throw new BadRequestException(__d('cakephp-recaptcha-mailhide', 'Invalid mail value'));
+                throw new BadRequestException(__d('recaptcha-mailhide', 'Invalid mail value'));
             }
 
             $this->set(compact('mail'));
