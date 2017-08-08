@@ -10,7 +10,6 @@
  * @link        https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
-
 //Sets the default RecaptchaMailhide name
 if (!defined('RECAPTCHA_MAILHIDE')) {
     define('RECAPTCHA_MAILHIDE', 'RecaptchaMailhide');
