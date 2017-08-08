@@ -32,7 +32,7 @@ class MailhideHelper extends Helper
      * @param string $mail Mail address
      * @return string
      */
-    protected function _obfuscate($mail)
+    protected function obfuscate($mail)
     {
         return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches) {
             $lenght = floor(strlen($matches[1]) / 2);
@@ -53,13 +53,13 @@ class MailhideHelper extends Helper
      * @param array $options Array of options and HTML attributes
      * @return string An `<a />` element
      * @uses \RecaptchaMailhide\Utility\Security::encryptMail()
-     * @uses _obfuscate()
+     * @uses obfuscate()
      */
     public function link($title, $mail, array $options = [])
     {
         //Obfuscates the title, if the title is the email address
         if (filter_var($title, FILTER_VALIDATE_EMAIL)) {
-            $title = $this->_obfuscate($title);
+            $title = $this->obfuscate($title);
         }
 
         $mail = Security::encryptMail($mail);

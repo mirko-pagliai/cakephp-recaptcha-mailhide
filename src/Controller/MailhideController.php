@@ -31,7 +31,7 @@ class MailhideController extends AppController
      */
     public function display()
     {
-        if (!in_array('Recaptcha', $this->components()->loaded())) {
+        if (!$this->components()->has('Recaptcha')) {
             throw new InternalErrorException(__d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'));
         }
 

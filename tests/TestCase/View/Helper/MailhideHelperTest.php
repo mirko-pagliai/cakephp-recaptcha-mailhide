@@ -69,7 +69,7 @@ class MailhideHelperTest extends TestCase
     }
 
     /**
-     * Test for `_obfuscate()` method
+     * Test for `obfuscate()` method
      * @test
      */
     public function testObfuscate()
@@ -80,7 +80,7 @@ class MailhideHelperTest extends TestCase
             'invalidmail' => 'inval*****',
             '@invalidmail' => '@invalidmail',
         ] as $mail => $expected) {
-            $result = $this->invokeMethod($this->Mailhide, '_obfuscate', [$mail]);
+            $result = $this->invokeMethod($this->Mailhide, 'obfuscate', [$mail]);
             $this->assertEquals($expected, $result);
         }
     }
