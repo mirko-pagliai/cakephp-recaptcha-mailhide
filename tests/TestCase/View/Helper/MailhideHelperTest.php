@@ -15,7 +15,7 @@ namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
-use Reflection\ReflectionTrait;
+use Tools\ReflectionTrait;
 
 /**
  * MailhideHelperTest class
@@ -80,8 +80,7 @@ class MailhideHelperTest extends TestCase
             'invalidmail' => 'inval*****',
             '@invalidmail' => '@invalidmail',
         ] as $mail => $expected) {
-            $result = $this->invokeMethod($this->Mailhide, 'obfuscate', [$mail]);
-            $this->assertEquals($expected, $result);
+            $this->assertEquals($expected, $this->invokeMethod($this->Mailhide, 'obfuscate', [$mail]));
         }
     }
 
@@ -91,7 +90,6 @@ class MailhideHelperTest extends TestCase
      */
     public function testLink()
     {
-        $result = $this->Mailhide->link('My address', 'test@example.com');
         $expected = [
             'a' => [
                 'href',
@@ -102,9 +100,8 @@ class MailhideHelperTest extends TestCase
             'My address',
             '/a',
         ];
-        $this->assertHtml($expected, $result);
+        $this->assertHtml($expected, $this->Mailhide->link('My address', 'test@example.com'));
 
-        $result = $this->Mailhide->link('test@example.com', 'test@example.com');
         $expected = [
             'a' => [
                 'href',
@@ -115,7 +112,7 @@ class MailhideHelperTest extends TestCase
             'te**@example.com',
             '/a',
         ];
-        $this->assertHtml($expected, $result);
+        $this->assertHtml($expected, $this->Mailhide->link('test@example.com', 'test@example.com'));
 
         $result = $this->Mailhide->link('My address', 'test@example.com', ['class' => 'custom-class', 'title' => 'custom title']);
         $expected = [

@@ -91,9 +91,8 @@ class MailhideControllerTest extends IntegrationTestCase
     public function testDisplayVerifyTrue()
     {
         $mail = 'test@example.com';
-        $url = $this->getDisplayActionUrl($mail);
 
-        $this->post($url, ['g-recaptcha-response' => 'foo']);
+        $this->post($this->getDisplayActionUrl($mail), ['g-recaptcha-response' => 'foo']);
         $this->assertResponseOk();
         $this->assertResponseContains($mail);
     }
@@ -115,8 +114,7 @@ class MailhideControllerTest extends IntegrationTestCase
      */
     public function testDisplayInvalidMailValueOnQuery()
     {
-        $mail = 'test@example.com';
-        $url = $this->getDisplayActionUrl($mail);
+        $url = $this->getDisplayActionUrl('test@example.com');
         $url['?']['mail'] .= 'foo';
 
         $this->post($url, ['g-recaptcha-response' => 'foo']);

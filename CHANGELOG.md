@@ -1,5 +1,9 @@
 # 1.x branch
 ## 1.1 branch
+### 1.1.1
+* now it uses the `mirko-pagliai/php-tools` package. This also replaces
+    `mirko-pagliai/reflection`.
+
 ### 1.1.0
 * some little fixes. This package requires at least CakePHP 3.4.
 
