@@ -58,16 +58,13 @@ class MailhideHelper extends Helper
     public function link($title, $mail, array $options = [])
     {
         //Obfuscates the title, if the title is the email address
-        if (filter_var($title, FILTER_VALIDATE_EMAIL)) {
-            $title = $this->obfuscate($title);
-        }
+        $title = filter_var($title, FILTER_VALIDATE_EMAIL) ? $this->obfuscate($title) : $title;
 
         $mail = Security::encryptMail($mail);
         $url = Router::url(['_name' => 'mailhide', '?' => compact('mail')], true);
 
         $options['escape'] = false;
-        $options['onClick'] = 'window.open(\'' . $url . '\',\'' . $title . '\',\'resizable,height=547,width=334\'); return false;';
-
+        $options['onClick'] = sprintf('window.open(\'%s\',\'%s\',\'resizable,height=547,width=334\'); return false;', $url, $title);
         $options += ['class' => 'recaptcha-mailhide', 'title' => $title];
 
         return $this->Html->link($title, $url, $options);
