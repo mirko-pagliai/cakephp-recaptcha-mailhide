@@ -15,7 +15,7 @@ namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
-use Reflection\ReflectionTrait;
+use Tools\ReflectionTrait;
 
 /**
  * MailhideHelperTest class
