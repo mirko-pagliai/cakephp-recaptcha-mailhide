@@ -10,7 +10,7 @@
     }],
     "require": {
         "php": ">=5.5.9",
-        "cakephp/cakephp": ">=3.4 <3.6",
+        "cakephp/cakephp": ">=3.4 <4",
         "crabstudio/recaptcha": "^2.0",
         "mirko-pagliai/php-tools": "^1.0"
     },
@@ -25,8 +25,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "RecaptchaMailhide\\Test\\": "tests",
-            "App\\": "tests/test_app/TestApp"
+            "App\\": "tests/test_app/TestApp/",
+            "RecaptchaMailhide\\Test\\": "tests"
         }
     }
 }
