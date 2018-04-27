@@ -11,7 +11,7 @@
     "require": {
         "php": ">=5.5.9",
         "cakephp/cakephp": ">=3.4 <4",
-        "crabstudio/recaptcha": "^2.0",
+        "crabstudio/recaptcha": "^2.1",
         "mirko-pagliai/php-tools": "^1.0"
     },
     "require-dev": {
