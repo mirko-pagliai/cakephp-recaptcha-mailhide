@@ -35,7 +35,7 @@ class MailhideController extends AppController
             throw new InternalErrorException(__d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'));
         }
 
-        $mail = $this->request->getQuery('mail');
+        $mail = $this->request->query('mail');
 
         if (!$mail) {
             throw new BadRequestException(__d('recaptcha-mailhide', 'Missing mail value'));
@@ -51,6 +51,6 @@ class MailhideController extends AppController
             $this->set(compact('mail'));
         }
 
-        $this->viewBuilder()->setLayout(RECAPTCHA_MAILHIDE . '.default');
+        $this->viewBuilder()->layout(RECAPTCHA_MAILHIDE . '.default');
     }
 }

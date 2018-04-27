@@ -22,18 +22,6 @@ use RecaptchaMailhide\Utility\Security;
 class MailhideControllerTest extends IntegrationTestCase
 {
     /**
-     * Setup the test case, backup the static object values so they can be
-     * restored. Specifically backs up the contents of Configure and paths in
-     *  App if they have not already been backed up
-     * @return void
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->useHttpServer(false);
-    }
-    /**
      * Adds additional event spies to the controller/view event manager
      * @param \Cake\Event\Event $event A dispatcher event
      * @param \Cake\Controller\Controller|null $controller Controller instance
@@ -41,11 +29,15 @@ class MailhideControllerTest extends IntegrationTestCase
      */
     public function controllerSpy($event, $controller = null)
     {
+        parent::controllerSpy($event, $controller);
+
+        $controller = $this->_controller;
+
         //Only for some test, it mocks the `Recaptcha` component, so the
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
             $controller->Recaptcha = $this->getMockBuilder(get_class($controller->Recaptcha))
-                ->setConstructorArgs([new ComponentRegistry($controller), $controller->Recaptcha->getConfig()])
+                ->setConstructorArgs([new ComponentRegistry($controller), $controller->Recaptcha->config()])
                 ->setMethods(['verify'])
                 ->getMock();
 
@@ -59,8 +51,6 @@ class MailhideControllerTest extends IntegrationTestCase
             $controller->components()->unload('Recaptcha');
             unset($controller->Recaptcha);
         }
-
-        return parent::controllerSpy($event, $controller);
     }
 
     /**

@@ -73,7 +73,7 @@ Configure::write('App', [
     ]
 ]);
 
-Cache::setConfig([
+Cache::config([
     '_cake_core_' => [
         'engine' => 'File',
         'prefix' => 'cake_core_',
@@ -105,5 +105,3 @@ DispatcherFactory::add('Routing');
 DispatcherFactory::add('ControllerFactory');
 
 ini_set('intl.default_locale', 'en_US');
-
-$_SERVER['PHP_SELF'] = '/';
