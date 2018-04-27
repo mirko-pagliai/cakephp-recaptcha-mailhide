@@ -13,7 +13,6 @@
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Routing\DispatcherFactory;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -45,11 +44,6 @@ safe_mkdir(CACHE . 'views');
 safe_mkdir(CACHE . 'models');
 
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
-
-//Disables deprecation warnings for CakePHP 3.6
-if (version_compare(Configure::version(), '3.6', '>=')) {
-    error_reporting(E_ALL & ~E_USER_DEPRECATED);
-}
 
 date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
@@ -100,9 +94,6 @@ Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt1234567890
 Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
 Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
-
-DispatcherFactory::add('Routing');
-DispatcherFactory::add('ControllerFactory');
 
 ini_set('intl.default_locale', 'en_US');
 
