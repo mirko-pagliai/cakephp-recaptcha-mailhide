@@ -3,6 +3,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![Build Status](https://api.travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide.svg?branch=master)](https://travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mirko-pagliai/cakephp-recaptcha-mailhide.svg?style=flat-square)](https://codecov.io/github/mirko-pagliai/cakephp-recaptcha-mailhide)
+[![Build status](https://ci.appveyor.com/api/projects/status/hal81mkbmwcmfbmi?svg=true)](https://ci.appveyor.com/project/mirko-pagliai/cakephp-recaptcha-mailhide)
 
 *reCAPTCHA Mailhide* is a CakePHP plugin that allows you to hide email addresses
 using reCAPTCHA.  
@@ -13,8 +14,15 @@ plugin, which must first be loaded and configured correctly.
 You can install the plugin via composer:
 
     $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide
+
+**NOTE**: the package may require one of the latest versions version of CakePHP.  
+Instead, the [cakephp3.2](//github.com/mirko-pagliai/cakephp-recaptcha-mailhide/tree/cakephp3.2)
+branch is compatible with CakePHP versions from 3.2 onwards.  
+In this case, you can install the package as well:
+
+    $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2
     
-Then you have to edit `APP/config/bootstrap.php` to load the plugin:
+After installation, you have to edit `APP/config/bootstrap.php` to load the plugin:
 
     Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
 
