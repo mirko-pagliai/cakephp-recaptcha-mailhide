@@ -45,6 +45,10 @@ safe_mkdir(CACHE . 'models');
 
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
+if (version_compare(Configure::version(), '3.6.2', '>=')) {
+    error_reporting(E_ALL & ~E_USER_DEPRECATED);
+}
+
 date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
