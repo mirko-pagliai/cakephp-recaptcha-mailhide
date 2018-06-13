@@ -14,6 +14,8 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 
+ini_set('intl.default_locale', 'en_US');
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 if (!defined('DS')) {
@@ -98,7 +100,5 @@ Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt1234567890
 Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
 Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
-
-ini_set('intl.default_locale', 'en_US');
 
 $_SERVER['PHP_SELF'] = '/';

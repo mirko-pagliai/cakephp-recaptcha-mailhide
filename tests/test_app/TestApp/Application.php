@@ -30,7 +30,7 @@ class Application extends BaseApplication
      */
     public function bootstrap()
     {
-        $this->addPlugin(RecaptchaMailhide::class);
+        $this->addPlugin(RecaptchaMailhide::class, ['routes' => false]);
     }
 
     /**
