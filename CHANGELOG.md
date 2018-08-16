@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.1 branch
+### 1.2.1
+* updated for `crabstudio/recaptcha` 2.1.1.
+
 ### 1.2.0
 * migrated to CakePHP 3.6.
 
