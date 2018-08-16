@@ -12,7 +12,6 @@
  */
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
-use Cake\Routing\Route\DashedRoute;
 
 Router::plugin(RECAPTCHA_MAILHIDE, ['path' => '/'], function (RouteBuilder $routes) {
     $routes->connect(
@@ -20,6 +19,4 @@ Router::plugin(RECAPTCHA_MAILHIDE, ['path' => '/'], function (RouteBuilder $rout
         ['controller' => 'Mailhide', 'action' => 'display'],
         ['_name' => 'mailhide']
     );
-
-    $routes->fallbacks(DashedRoute::class);
 });
