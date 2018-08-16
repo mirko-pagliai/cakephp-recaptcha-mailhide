@@ -20,7 +20,9 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide
  */
-use Cake\Core\Plugin;
+use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 
-//Load all plugin routes
-Plugin::routes();
+Router::scope('/', function (RouteBuilder $routes) {
+    $routes->loadPlugin(RECAPTCHA_MAILHIDE);
+});

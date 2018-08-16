@@ -13,9 +13,10 @@
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Routing\DispatcherFactory;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+ini_set('intl.default_locale', 'en_US');
+date_default_timezone_set('UTC');
+mb_internal_encoding('UTF-8');
 
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
@@ -32,7 +33,7 @@ define('APP', ROOT . 'tests' . DS . 'test_app' . DS);
 define('APP_DIR', 'test_app');
 define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', APP . 'webroot' . DS);
-define('TMP', sys_get_temp_dir() . DS);
+define('TMP', sys_get_temp_dir() . DS . 'cakephp-recaptcha-mailhide' . DS);
 define('CONFIG', APP . 'config' . DS);
 define('CACHE', TMP);
 define('LOGS', TMP);
@@ -44,15 +45,8 @@ safe_mkdir(CACHE);
 safe_mkdir(CACHE . 'views');
 safe_mkdir(CACHE . 'models');
 
+require dirname(__DIR__) . '/vendor/autoload.php';
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
-
-//Disables deprecation warnings for CakePHP 3.6
-if (version_compare(Configure::version(), '3.6', '>=')) {
-    error_reporting(E_ALL & ~E_USER_DEPRECATED);
-}
-
-date_default_timezone_set('UTC');
-mb_internal_encoding('UTF-8');
 
 Configure::write('debug', true);
 Configure::write('App', [
@@ -69,7 +63,10 @@ Configure::write('App', [
     'cssBaseUrl' => 'css/',
     'paths' => [
         'plugins' => [APP . 'Plugin' . DS],
-        'templates' => [APP . 'TestApp' . DS . 'Template' . DS],
+        'templates' => [
+            APP . 'Template' . DS,
+            ROOT . 'src' . DS . 'Template' . DS,
+        ],
     ]
 ]);
 
@@ -100,10 +97,5 @@ Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt1234567890
 Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
 Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
-
-DispatcherFactory::add('Routing');
-DispatcherFactory::add('ControllerFactory');
-
-ini_set('intl.default_locale', 'en_US');
 
 $_SERVER['PHP_SELF'] = '/';
