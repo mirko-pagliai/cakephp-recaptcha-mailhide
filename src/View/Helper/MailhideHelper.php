@@ -36,7 +36,6 @@ class MailhideHelper extends Helper
     {
         return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches) {
             $lenght = floor(strlen($matches[1]) / 2);
-
             $name = substr($matches[1], 0, $lenght) . str_repeat('*', $lenght);
 
             return $name . $matches[2];

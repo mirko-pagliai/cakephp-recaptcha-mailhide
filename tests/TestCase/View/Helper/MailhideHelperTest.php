@@ -12,6 +12,7 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 
+use Cake\Http\BaseApplication;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
@@ -39,18 +40,10 @@ class MailhideHelperTest extends TestCase
     {
         parent::setUp();
 
+        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
+        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+
         $this->Mailhide = new MailhideHelper(new View);
-    }
-
-    /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->Mailhide);
     }
 
     /**

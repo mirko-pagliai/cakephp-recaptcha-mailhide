@@ -13,6 +13,7 @@
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
 use Cake\Controller\ComponentRegistry;
+use Cake\Http\BaseApplication;
 use Cake\TestSuite\IntegrationTestCase;
 use RecaptchaMailhide\Utility\Security;
 
@@ -21,6 +22,20 @@ use RecaptchaMailhide\Utility\Security;
  */
 class MailhideControllerTest extends IntegrationTestCase
 {
+    /**
+     * Setup the test case, backup the static object values so they can be
+     * restored. Specifically backs up the contents of Configure and paths in
+     *  App if they have not already been backed up
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
+        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+    }
+
     /**
      * Adds additional event spies to the controller/view event manager
      * @param \Cake\Event\Event $event A dispatcher event
@@ -35,15 +50,11 @@ class MailhideControllerTest extends IntegrationTestCase
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
             $this->_controller->Recaptcha = $this->getMockBuilder(get_class($this->_controller->Recaptcha))
-                ->setConstructorArgs([
-                    new ComponentRegistry($this->_controller),
-                    $this->_controller->Recaptcha->getConfig(),
-                ])
+                ->setConstructorArgs([new ComponentRegistry($this->_controller), $this->_controller->Recaptcha->getConfig()])
                 ->setMethods(['verify'])
                 ->getMock();
 
-            $this->_controller->Recaptcha->method('verify')
-                ->will($this->returnValue(true));
+            $this->_controller->Recaptcha->method('verify')->will($this->returnValue(true));
         }
 
         //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the

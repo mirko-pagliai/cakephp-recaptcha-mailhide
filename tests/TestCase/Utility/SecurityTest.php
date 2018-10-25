@@ -13,11 +13,26 @@
 namespace RecaptchaMailhide\Test\TestCase\Utility;
 
 use Cake\Core\Configure;
+use Cake\Http\BaseApplication;
 use Cake\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
 class SecurityTest extends TestCase
 {
+    /**
+     * Setup the test case, backup the static object values so they can be
+     * restored. Specifically backs up the contents of Configure and paths in
+     *  App if they have not already been backed up
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
+        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+    }
+
     /**
      * Test for `decryptMail()` method
      * @test
@@ -29,16 +44,13 @@ class SecurityTest extends TestCase
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {
             $encrypted = Security::encryptMail($mail);
-            $decrypted = Security::decryptMail($encrypted);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted), $mail);
 
             $encrypted = Security::encryptMail($mail, $key);
-            $decrypted = Security::decryptMail($encrypted, $key);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted, $key), $mail);
 
             $encrypted = Security::encryptMail($mail, $key, $hmacSalt);
-            $decrypted = Security::decryptMail($encrypted, $key, $hmacSalt);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted, $key, $hmacSalt), $mail);
         }
     }
 
