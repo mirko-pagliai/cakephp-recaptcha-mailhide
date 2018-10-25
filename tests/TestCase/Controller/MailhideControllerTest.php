@@ -50,15 +50,11 @@ class MailhideControllerTest extends IntegrationTestCase
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
             $this->_controller->Recaptcha = $this->getMockBuilder(get_class($this->_controller->Recaptcha))
-                ->setConstructorArgs([
-                    new ComponentRegistry($this->_controller),
-                    $this->_controller->Recaptcha->getConfig(),
-                ])
+                ->setConstructorArgs([new ComponentRegistry($this->_controller), $this->_controller->Recaptcha->getConfig()])
                 ->setMethods(['verify'])
                 ->getMock();
 
-            $this->_controller->Recaptcha->method('verify')
-                ->will($this->returnValue(true));
+            $this->_controller->Recaptcha->method('verify')->will($this->returnValue(true));
         }
 
         //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the

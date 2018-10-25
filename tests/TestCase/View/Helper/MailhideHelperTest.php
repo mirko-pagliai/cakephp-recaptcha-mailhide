@@ -47,17 +47,6 @@ class MailhideHelperTest extends TestCase
     }
 
     /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->Mailhide);
-    }
-
-    /**
      * Internal method to get the "onClick" regex
      * @param string $title Link title
      * @return string

@@ -44,16 +44,13 @@ class SecurityTest extends TestCase
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {
             $encrypted = Security::encryptMail($mail);
-            $decrypted = Security::decryptMail($encrypted);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted), $mail);
 
             $encrypted = Security::encryptMail($mail, $key);
-            $decrypted = Security::decryptMail($encrypted, $key);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted, $key), $mail);
 
             $encrypted = Security::encryptMail($mail, $key, $hmacSalt);
-            $decrypted = Security::decryptMail($encrypted, $key, $hmacSalt);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted, $key, $hmacSalt), $mail);
         }
     }
 
