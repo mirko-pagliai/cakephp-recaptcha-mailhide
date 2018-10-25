@@ -13,11 +13,26 @@
 namespace RecaptchaMailhide\Test\TestCase\Utility;
 
 use Cake\Core\Configure;
+use Cake\Http\BaseApplication;
 use Cake\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
 class SecurityTest extends TestCase
 {
+    /**
+     * Setup the test case, backup the static object values so they can be
+     * restored. Specifically backs up the contents of Configure and paths in
+     *  App if they have not already been backed up
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
+        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+    }
+
     /**
      * Test for `decryptMail()` method
      * @test

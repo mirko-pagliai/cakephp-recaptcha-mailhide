@@ -13,6 +13,7 @@
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
 use Cake\Controller\ComponentRegistry;
+use Cake\Http\BaseApplication;
 use Cake\TestSuite\IntegrationTestCase;
 use RecaptchaMailhide\Utility\Security;
 
@@ -21,6 +22,20 @@ use RecaptchaMailhide\Utility\Security;
  */
 class MailhideControllerTest extends IntegrationTestCase
 {
+    /**
+     * Setup the test case, backup the static object values so they can be
+     * restored. Specifically backs up the contents of Configure and paths in
+     *  App if they have not already been backed up
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
+        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+    }
+
     /**
      * Adds additional event spies to the controller/view event manager
      * @param \Cake\Event\Event $event A dispatcher event
