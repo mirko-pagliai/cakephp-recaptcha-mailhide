@@ -100,3 +100,5 @@ Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234')
 @Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 
 $_SERVER['PHP_SELF'] = '/';
+
+loadPHPUnitAliases();
