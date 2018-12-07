@@ -69,6 +69,7 @@ Configure::write('App', [
         ],
     ]
 ]);
+Configure::write('Session', ['defaults' => 'php']);
 
 Cache::setConfig([
     '_cake_core_' => [
@@ -87,8 +88,6 @@ Cache::setConfig([
         'serialize' => true,
     ],
 ]);
-
-Configure::write('Session', ['defaults' => 'php']);
 
 /**
  * Loads plugins
