@@ -39,7 +39,7 @@ class SecurityTest extends TestCase
      */
     public function testDecryptMail()
     {
-        $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey') . '01234';
+        $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
         $hmacSalt = Configure::read('Security.salt') . '01234';
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {
@@ -60,7 +60,7 @@ class SecurityTest extends TestCase
      */
     public function testEncryptMail()
     {
-        $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey') . '01234';
+        $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
         $hmacSalt = Configure::read('Security.salt') . '01234';
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {

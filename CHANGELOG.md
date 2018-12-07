@@ -1,4 +1,8 @@
 # 1.x branch
+## 1.3 branch
+### 1.3.0
+* removed the `RECAPTCHA_MAILHIDE` constant.
+
 ## 1.2 branch
 ### 1.2.1
 * updated for CakePHP 3.6 and 3.7;
