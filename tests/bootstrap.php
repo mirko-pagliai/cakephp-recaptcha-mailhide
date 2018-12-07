@@ -69,6 +69,7 @@ Configure::write('App', [
         ],
     ]
 ]);
+Configure::write('Session', ['defaults' => 'php']);
 
 Cache::setConfig([
     '_cake_core_' => [
@@ -88,8 +89,6 @@ Cache::setConfig([
     ],
 ]);
 
-Configure::write('Session', ['defaults' => 'php']);
-
 /**
  * Loads plugins
  */
@@ -100,3 +99,5 @@ Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234')
 @Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 
 $_SERVER['PHP_SELF'] = '/';
+
+loadPHPUnitAliases();
