@@ -27,7 +27,7 @@ class Plugin extends BasePlugin
      */
     public function bootstrap(PluginApplicationInterface $app)
     {
-        if (!$app->getPlugins()->has('Assets')) {
+        if (!$app->getPlugins()->has('Recaptcha')) {
             $app->addPlugin('Recaptcha', ['path' => ROOT . DS . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
         }
 
