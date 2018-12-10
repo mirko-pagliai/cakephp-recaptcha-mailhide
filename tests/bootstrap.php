@@ -12,7 +12,6 @@
  */
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
-use Cake\Core\Plugin;
 
 ini_set('intl.default_locale', 'en_US');
 date_default_timezone_set('UTC');
@@ -94,9 +93,6 @@ Cache::setConfig([
  */
 Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
 Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
-
-// @codingStandardsIgnoreLine
-@Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 
 $_SERVER['PHP_SELF'] = '/';
 
