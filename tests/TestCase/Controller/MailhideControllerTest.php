@@ -47,6 +47,7 @@ class MailhideControllerTest extends IntegrationTestCase
     {
         parent::controllerSpy($event, $controller);
 
+        //See https://github.com/travis-ci/travis-ci/issues/6339
         $this->_controller->Recaptcha->setConfig('httpClientOptions', ['adapter' => Stream::class]);
 
         //Only for some test, it mocks the `Recaptcha` component, so the
