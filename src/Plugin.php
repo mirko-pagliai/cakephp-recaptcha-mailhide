@@ -13,10 +13,24 @@
 namespace RecaptchaMailhide;
 
 use Cake\Core\BasePlugin;
+use Cake\Core\PluginApplicationInterface;
 
 /**
  * Plugin class
  */
 class Plugin extends BasePlugin
 {
+    /**
+     * Load all the application configuration and bootstrap logic
+     * @param PluginApplicationInterface $app The host application
+     * @return void
+     */
+    public function bootstrap(PluginApplicationInterface $app)
+    {
+        if (!$app->getPlugins()->has('Assets')) {
+            $app->addPlugin('Recaptcha', ['path' => ROOT . DS . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
+        }
+
+        parent::bootstrap($app);
+    }
 }
