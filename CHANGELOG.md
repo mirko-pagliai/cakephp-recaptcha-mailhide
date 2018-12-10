@@ -1,6 +1,7 @@
 # 1.x branch
 ## 1.2 branch
 ### 1.2.1
+* fixed bug on routes, it first checks that the route does not already exist;
 * updated for CakePHP 3.6 and 3.7;
 * updated for `crabstudio/recaptcha` 2.1.1.
 
