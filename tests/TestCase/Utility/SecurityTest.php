@@ -13,7 +13,6 @@
 namespace RecaptchaMailhide\Test\TestCase\Utility;
 
 use Cake\Core\Configure;
-use Cake\Http\BaseApplication;
 use Cake\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
@@ -27,8 +26,7 @@ class SecurityTest extends TestCase
     {
         parent::setUp();
 
-        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
-        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+        $this->loadPlugins(['RecaptchaMailhide']);
     }
 
     /**

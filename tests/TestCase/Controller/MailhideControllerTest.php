@@ -13,16 +13,21 @@
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
 use Cake\Controller\ComponentRegistry;
-use Cake\Http\BaseApplication;
 use Cake\Http\Client\Adapter\Stream;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
 /**
  * MailhideControllerTest class
  */
-class MailhideControllerTest extends IntegrationTestCase
+class MailhideControllerTest extends TestCase
 {
+    use IntegrationTestTrait {
+        IntegrationTestTrait::setUp as cakeSetUp;
+        IntegrationTestTrait::controllerSpy as cakeControllerSpy;
+    }
+
     /**
      * Called before every test method
      * @return void
@@ -30,9 +35,9 @@ class MailhideControllerTest extends IntegrationTestCase
     public function setUp()
     {
         parent::setUp();
+        $this->cakeSetUp();
 
-        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
-        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+        $this->loadPlugins(['RecaptchaMailhide']);
     }
 
     /**
@@ -43,7 +48,7 @@ class MailhideControllerTest extends IntegrationTestCase
      */
     public function controllerSpy($event, $controller = null)
     {
-        parent::controllerSpy($event, $controller);
+        $this->cakeControllerSpy($event, $controller);
 
         //See https://github.com/travis-ci/travis-ci/issues/6339
         $this->_controller->Recaptcha->setConfig('httpClientOptions', ['adapter' => Stream::class]);

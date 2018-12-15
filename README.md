@@ -11,7 +11,8 @@ It works by using the [crabstudio/Recaptcha](https://github.com/crabstudio/Recap
 plugin, which must first be loaded and configured correctly.
 
 Did you like this plugin? Its development requires a lot of time for me.  
-Please consider the possibility of making [a donation](//paypal.me/mirkopagliai): even a coffee is enough! Thank you.
+Please consider the possibility of making [a donation](//paypal.me/mirkopagliai):
+even a coffee is enough! Thank you.
 
 [![Make a donation](https://www.paypalobjects.com/webstatic/mktg/logo-center/logo_paypal_carte.jpg)](//paypal.me/mirkopagliai)
 
@@ -20,7 +21,8 @@ You can install the plugin via composer:
 
     $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide
 
-**NOTE**: the package may require one of the latest versions version of CakePHP.  
+**NOTE: the latest version available requires at least CakePHP 3.7**.
+
 Instead, the [cakephp3.2](//github.com/mirko-pagliai/cakephp-recaptcha-mailhide/tree/cakephp3.2)
 branch is compatible with CakePHP versions from 3.2 onwards.  
 In this case, you can install the package as well:
