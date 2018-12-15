@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![Build Status](https://api.travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide.svg?branch=master)](https://travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide)
-[![Coverage Status](https://img.shields.io/codecov/c/github/mirko-pagliai/cakephp-recaptcha-mailhide.svg?style=flat-square)](https://codecov.io/github/mirko-pagliai/cakephp-recaptcha-mailhide)
+[![codecov](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide/branch/master/graph/badge.svg)](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide)
 [![Build status](https://ci.appveyor.com/api/projects/status/hal81mkbmwcmfbmi?svg=true)](https://ci.appveyor.com/project/mirko-pagliai/cakephp-recaptcha-mailhide)
 
 *reCAPTCHA Mailhide* is a CakePHP plugin that allows you to hide email addresses
@@ -11,7 +11,8 @@ It works by using the [crabstudio/Recaptcha](https://github.com/crabstudio/Recap
 plugin, which must first be loaded and configured correctly.
 
 Did you like this plugin? Its development requires a lot of time for me.  
-Please consider the possibility of making [a donation](//paypal.me/mirkopagliai): even a coffee is enough! Thank you.
+Please consider the possibility of making [a donation](//paypal.me/mirkopagliai):
+even a coffee is enough! Thank you.
 
 [![Make a donation](https://www.paypalobjects.com/webstatic/mktg/logo-center/logo_paypal_carte.jpg)](//paypal.me/mirkopagliai)
 
@@ -20,7 +21,8 @@ You can install the plugin via composer:
 
     $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide
 
-**NOTE**: the package may require one of the latest versions version of CakePHP.  
+**NOTE: the latest version available requires at least CakePHP 3.7**.
+
 Instead, the [cakephp3.2](//github.com/mirko-pagliai/cakephp-recaptcha-mailhide/tree/cakephp3.2)
 branch is compatible with CakePHP versions from 3.2 onwards.  
 In this case, you can install the package as well:
