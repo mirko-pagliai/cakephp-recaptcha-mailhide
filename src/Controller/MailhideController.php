@@ -51,6 +51,6 @@ class MailhideController extends AppController
             $this->set(compact('mail'));
         }
 
-        $this->viewBuilder()->setLayout(RECAPTCHA_MAILHIDE . '.default');
+        $this->viewBuilder()->setLayout('RecaptchaMailhide.default');
     }
 }

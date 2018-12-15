@@ -1,4 +1,9 @@
 # 1.x branch
+## 1.3 branch
+### 1.3.0
+* removed the `RECAPTCHA_MAILHIDE` constant;
+* updated for CakePHP 3.7.
+
 ## 1.2 branch
 ### 1.2.2
 * fixed bug on routes, it first checks that the route does not already exist;

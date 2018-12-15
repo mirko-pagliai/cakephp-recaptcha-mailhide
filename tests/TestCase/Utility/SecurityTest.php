@@ -13,24 +13,20 @@
 namespace RecaptchaMailhide\Test\TestCase\Utility;
 
 use Cake\Core\Configure;
-use Cake\Http\BaseApplication;
 use Cake\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
 class SecurityTest extends TestCase
 {
     /**
-     * Setup the test case, backup the static object values so they can be
-     * restored. Specifically backs up the contents of Configure and paths in
-     *  App if they have not already been backed up
+     * Called before every test method
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
 
-        $app = $this->getMockForAbstractClass(BaseApplication::class, ['']);
-        $app->addPlugin('RecaptchaMailhide')->pluginBootstrap();
+        $this->loadPlugins(['RecaptchaMailhide']);
     }
 
     /**
@@ -39,7 +35,7 @@ class SecurityTest extends TestCase
      */
     public function testDecryptMail()
     {
-        $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey') . '01234';
+        $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
         $hmacSalt = Configure::read('Security.salt') . '01234';
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {
@@ -60,7 +56,7 @@ class SecurityTest extends TestCase
      */
     public function testEncryptMail()
     {
-        $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey') . '01234';
+        $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
         $hmacSalt = Configure::read('Security.salt') . '01234';
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {

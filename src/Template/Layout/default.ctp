@@ -23,7 +23,7 @@
             ]);
             echo $this->fetch('meta');
             echo $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
-            echo $this->Html->css(RECAPTCHA_MAILHIDE . '.default.css');
+            echo $this->Html->css('RecaptchaMailhide.default.css');
             echo $this->fetch('css');
             echo $this->fetch('script');
         ?>
