@@ -53,19 +53,19 @@ class MailhideControllerTest extends TestCase
     {
         $this->cakeControllerSpy($event, $controller);
 
-        //See https://github.com/travis-ci/travis-ci/issues/6339
-        $this->_controller->Recaptcha->setConfig('httpClientOptions', ['adapter' => Stream::class]);
-
         //Only for some test, it mocks the `Recaptcha` component, so the
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
             $this->_controller->Recaptcha = $this->getMockBuilder(get_class($this->_controller->Recaptcha))
-                ->setConstructorArgs([new ComponentRegistry($this->_controller), $this->_controller->Recaptcha->getConfig()])
+                ->setConstructorArgs([$this->_controller->components()])
                 ->setMethods(['verify'])
                 ->getMock();
 
             $this->_controller->Recaptcha->method('verify')->will($this->returnValue(true));
         }
+
+        //See https://github.com/travis-ci/travis-ci/issues/6339
+        $this->_controller->Recaptcha->setConfig('httpClientOptions', ['adapter' => Stream::class]);
 
         //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the
         //  `Recaptcha` component
