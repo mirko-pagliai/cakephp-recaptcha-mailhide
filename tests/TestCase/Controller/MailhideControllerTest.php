@@ -24,9 +24,13 @@ use RecaptchaMailhide\Utility\Security;
 class MailhideControllerTest extends TestCase
 {
     use IntegrationTestTrait {
-        IntegrationTestTrait::setUp as cakeSetUp;
         IntegrationTestTrait::controllerSpy as cakeControllerSpy;
     }
+
+    /**
+     * @var string
+     */
+    protected $example = 'test@example.com';
 
     /**
      * Called before every test method
@@ -35,7 +39,6 @@ class MailhideControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->cakeSetUp();
 
         $this->loadPlugins(['RecaptchaMailhide']);
     }
@@ -88,18 +91,22 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplay()
     {
-        $mail = 'test@example.com';
-        $url = $this->getDisplayActionUrl($mail);
+        $url = $this->getDisplayActionUrl($this->example);
 
         foreach (['get', 'post'] as $method) {
             $this->{$method}($url);
             $this->assertResponseOk();
-            $this->assertResponseNotContains($mail);
+            $this->assertResponseNotContains($this->example);
 
             $this->{$method}($url, ['g-recaptcha-response' => 'foo']);
             $this->assertResponseOk();
-            $this->assertResponseNotContains($mail);
+            $this->assertResponseNotContains($this->example);
         }
+
+        //Missing mail on query
+        $this->get(['_name' => 'mailhide']);
+        $this->assertResponseError();
+        $this->assertResponseContains('Missing mail value');
     }
 
     /**
@@ -109,22 +116,9 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplayVerifyTrue()
     {
-        $mail = 'test@example.com';
-
-        $this->post($this->getDisplayActionUrl($mail), ['g-recaptcha-response' => 'foo']);
+        $this->post($this->getDisplayActionUrl($this->example), ['g-recaptcha-response' => 'foo']);
         $this->assertResponseOk();
-        $this->assertResponseContains($mail);
-    }
-
-    /**
-     * Test for `display()` method, missing mail on query
-     * @test
-     */
-    public function testDisplayMissingMailOnQuery()
-    {
-        $this->get(['_name' => 'mailhide']);
-        $this->assertResponseError();
-        $this->assertResponseContains('Missing mail value');
+        $this->assertResponseContains($this->example);
     }
 
     /**
@@ -133,9 +127,8 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplayInvalidMailValueOnQuery()
     {
-        $url = $this->getDisplayActionUrl('test@example.com');
+        $url = $this->getDisplayActionUrl($this->example);
         $url['?']['mail'] .= 'foo';
-
         $this->post($url, ['g-recaptcha-response' => 'foo']);
         $this->assertResponseError();
         $this->assertResponseContains('Invalid mail value');
@@ -147,7 +140,7 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplayMissingRecaptchaComponent()
     {
-        $this->get($this->getDisplayActionUrl('test@example.com'));
+        $this->get($this->getDisplayActionUrl($this->example));
         $this->assertResponseFailure();
         $this->assertResponseContains('Missing Recaptcha component');
     }
