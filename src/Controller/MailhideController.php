@@ -31,7 +31,8 @@ class MailhideController extends AppController
      */
     public function display()
     {
-        is_true_or_fail($this->components()->has('Recaptcha'), __d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'), InternalErrorException::class);
+        $hasRecaptcha = $this->components()->has('Recaptcha');
+        is_true_or_fail($hasRecaptcha, __d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'), InternalErrorException::class);
 
         $mail = $this->request->getQuery('mail');
         is_true_or_fail($mail, __d('recaptcha-mailhide', 'Missing mail value'), BadRequestException::class);
