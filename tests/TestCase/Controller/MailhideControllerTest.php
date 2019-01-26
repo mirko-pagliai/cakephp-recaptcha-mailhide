@@ -12,7 +12,6 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
-use Cake\Controller\ComponentRegistry;
 use Cake\Http\Client\Adapter\Stream;
 use Cake\TestSuite\IntegrationTestCase;
 use RecaptchaMailhide\Utility\Security;
@@ -32,28 +31,26 @@ class MailhideControllerTest extends IntegrationTestCase
     {
         parent::controllerSpy($event, $controller);
 
-        $controller = $this->_controller;
-
         //Only for some test, it mocks the `Recaptcha` component, so the
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
-            $controller->Recaptcha = $this->getMockBuilder(get_class($controller->Recaptcha))
-                ->setConstructorArgs([new ComponentRegistry($controller), $controller->Recaptcha->config()])
+            $this->_controller->Recaptcha = $this->getMockBuilder(get_class($this->_controller->Recaptcha))
+                ->setConstructorArgs([$this->_controller->Recaptcha->_registry, $this->_controller->Recaptcha->config()])
                 ->setMethods(['verify'])
                 ->getMock();
 
-            $controller->Recaptcha->method('verify')
+            $this->_controller->Recaptcha->method('verify')
                 ->will($this->returnValue(true));
         }
 
         //See https://github.com/travis-ci/travis-ci/issues/6339
-        $controller->Recaptcha->config('httpClientOptions', ['adapter' => Stream::class]);
+        $this->_controller->Recaptcha->config('httpClientOptions', ['adapter' => Stream::class]);
 
         //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the
         //  `Recaptcha` component
         if ($this->getName() === 'testDisplayMissingRecaptchaComponent') {
-            $controller->components()->unload('Recaptcha');
-            unset($controller->Recaptcha);
+            $this->_controller->components()->unload('Recaptcha');
+            unset($this->_controller->Recaptcha);
         }
     }
 
