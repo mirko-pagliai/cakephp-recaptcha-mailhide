@@ -12,7 +12,6 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
-use Cake\Http\Client\Adapter\Stream;
 use Cake\TestSuite\IntegrationTestCase;
 use RecaptchaMailhide\Utility\Security;
 
@@ -44,7 +43,9 @@ class MailhideControllerTest extends IntegrationTestCase
         }
 
         //See https://github.com/travis-ci/travis-ci/issues/6339
-        $this->_controller->Recaptcha->config('httpClientOptions', ['adapter' => Stream::class]);
+        $adapter = '\Cake\Http\Client\Adapter\Stream';
+        $adapter = class_exists($adapter) ? $adapter : '\Cake\Network\Http\Adapter\Stream';
+        $this->_controller->Recaptcha->config('httpClientOptions', compact('adapter'));
 
         //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the
         //  `Recaptcha` component
