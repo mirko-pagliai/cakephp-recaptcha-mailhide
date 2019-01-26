@@ -27,6 +27,16 @@ Instead, the [cakephp3.2](//github.com/mirko-pagliai/cakephp-recaptcha-mailhide/
 branch is compatible with CakePHP versions from 3.2 onwards.  
 In this case, you can install the package as well:
 
+*CakePHP 3.2:*
+
+    $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2 crabstudio/recaptcha:2.0.0
+
+*CakePHP 3.3 and 3.4:*
+
+    $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2 crabstudio/recaptcha:2.0.5
+
+*CakePHP 3.5 and 3.6:*
+
     $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2
     
 After installation, you have to edit `APP/config/bootstrap.php` to load the plugin:
