@@ -16,13 +16,13 @@ matrix:
       env: COVERAGE=1
 
     - php: 7.0
-      env: CAKEPHP_VERSION="3.2.*" PHPUNIT_VERSION="^5.7"
+      env: CAKEPHP_VERSION="3.2.*" PHPUNIT_VERSION="^5.7" RECAPTCHA_VERSION="2.0.5"
 
     - php: 7.0
-      env: CAKEPHP_VERSION="3.3.*" PHPUNIT_VERSION="^5.7"
+      env: CAKEPHP_VERSION="3.3.*" PHPUNIT_VERSION="^5.7" RECAPTCHA_VERSION="2.0.5"
 
     - php: 7.0
-      env: CAKEPHP_VERSION="3.4.*"
+      env: CAKEPHP_VERSION="3.4.*" RECAPTCHA_VERSION="2.0.5"
 
     - php: 7.0
       env: CAKEPHP_VERSION="3.5.*"
@@ -33,6 +33,7 @@ matrix:
 install:
   - composer self-update
   - composer install --prefer-dist --no-interaction
+  - if [[ ! -z "$RECAPTCHA_VERSION" ]]; then composer require --update-with-dependencies crabstudio/recaptcha:${RECAPTCHA_VERSION}; fi
   - if [[ ! -z "$CAKEPHP_VERSION" ]]; then composer require --update-with-dependencies cakephp/cakephp:${CAKEPHP_VERSION}; fi
   - if [[ ! -z "$PHPUNIT_VERSION" ]]; then composer require --update-with-dependencies phpunit/phpunit:${PHPUNIT_VERSION}; fi
 
