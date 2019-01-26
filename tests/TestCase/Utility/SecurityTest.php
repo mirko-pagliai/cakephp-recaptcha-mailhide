@@ -13,22 +13,14 @@
 namespace RecaptchaMailhide\Test\TestCase\Utility;
 
 use Cake\Core\Configure;
-use Cake\TestSuite\TestCase;
+use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
+/**
+ * SecurityTest class
+ */
 class SecurityTest extends TestCase
 {
-    /**
-     * Called before every test method
-     * @return void
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->loadPlugins(['RecaptchaMailhide']);
-    }
-
     /**
      * Test for `decryptMail()` method
      * @test

@@ -34,15 +34,16 @@ define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', APP . 'webroot' . DS);
 define('TMP', sys_get_temp_dir() . DS . 'cakephp-recaptcha-mailhide' . DS);
 define('CONFIG', APP . 'config' . DS);
-define('CACHE', TMP);
-define('LOGS', TMP);
+define('CACHE', TMP . 'cache');
+define('LOGS', TMP . 'logs');
 define('SESSIONS', TMP . 'sessions' . DS);
 
-safe_mkdir(LOGS);
-safe_mkdir(SESSIONS);
-safe_mkdir(CACHE);
-safe_mkdir(CACHE . 'views');
-safe_mkdir(CACHE . 'models');
+@mkdir(TMP);
+@mkdir(LOGS);
+@mkdir(SESSIONS);
+@mkdir(CACHE);
+@mkdir(CACHE . 'views');
+@mkdir(CACHE . 'models');
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
@@ -88,11 +89,10 @@ Cache::setConfig([
     ],
 ]);
 
-/**
- * Loads plugins
- */
 Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
 Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
+
+Configure::write('pluginsToLoad', ['RecaptchaMailhide']);
 
 $_SERVER['PHP_SELF'] = '/';
 

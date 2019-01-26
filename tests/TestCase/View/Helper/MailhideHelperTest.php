@@ -12,18 +12,15 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 
-use Cake\TestSuite\TestCase;
 use Cake\View\View;
+use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
-use Tools\ReflectionTrait;
 
 /**
  * MailhideHelperTest class
  */
 class MailhideHelperTest extends TestCase
 {
-    use ReflectionTrait;
-
     /**
      * @var \RecaptchaMailhide\View\Helper\MailhideHelper
      */
@@ -36,8 +33,6 @@ class MailhideHelperTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
-        $this->loadPlugins(['RecaptchaMailhide']);
 
         $this->Mailhide = new MailhideHelper(new View);
     }
@@ -103,7 +98,6 @@ class MailhideHelperTest extends TestCase
         ];
         $this->assertHtml($expected, $this->Mailhide->link('test@example.com', 'test@example.com'));
 
-        $result = $this->Mailhide->link('My address', 'test@example.com', ['class' => 'custom-class', 'title' => 'custom title']);
         $expected = [
             'a' => [
                 'href',
@@ -114,6 +108,7 @@ class MailhideHelperTest extends TestCase
             'My address',
             '/a',
         ];
+        $result = $this->Mailhide->link('My address', 'test@example.com', ['class' => 'custom-class', 'title' => 'custom title']);
         $this->assertHtml($expected, $result);
     }
 }

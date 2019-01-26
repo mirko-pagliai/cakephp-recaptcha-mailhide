@@ -31,9 +31,7 @@ class Security extends CakeSecurity
      */
     public static function decryptMail($mail, $key = null, $hmacSalt = null)
     {
-        $key = $key ?: Configure::read('RecaptchaMailhide.encryptKey');
-
-        return parent::decrypt(base64_decode($mail), $key, $hmacSalt);
+        return parent::decrypt(base64_decode($mail), $key ?: Configure::read('RecaptchaMailhide.encryptKey'), $hmacSalt);
     }
 
     /**
@@ -47,8 +45,6 @@ class Security extends CakeSecurity
      */
     public static function encryptMail($mail, $key = null, $hmacSalt = null)
     {
-        $key = $key ?: Configure::read('RecaptchaMailhide.encryptKey');
-
-        return base64_encode(parent::encrypt($mail, $key, $hmacSalt));
+        return base64_encode(parent::encrypt($mail, $key ?: Configure::read('RecaptchaMailhide.encryptKey'), $hmacSalt));
     }
 }

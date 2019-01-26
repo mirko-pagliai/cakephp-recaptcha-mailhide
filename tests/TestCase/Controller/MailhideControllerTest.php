@@ -12,10 +12,9 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
-use Cake\Controller\ComponentRegistry;
 use Cake\Http\Client\Adapter\Stream;
-use Cake\TestSuite\IntegrationTestTrait;
-use Cake\TestSuite\TestCase;
+use MeTools\TestSuite\IntegrationTestTrait;
+use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
 /**
@@ -23,22 +22,12 @@ use RecaptchaMailhide\Utility\Security;
  */
 class MailhideControllerTest extends TestCase
 {
-    use IntegrationTestTrait {
-        IntegrationTestTrait::setUp as cakeSetUp;
-        IntegrationTestTrait::controllerSpy as cakeControllerSpy;
-    }
+    use IntegrationTestTrait;
 
     /**
-     * Called before every test method
-     * @return void
+     * @var string
      */
-    public function setUp()
-    {
-        parent::setUp();
-        $this->cakeSetUp();
-
-        $this->loadPlugins(['RecaptchaMailhide']);
-    }
+    protected $example = 'test@example.com';
 
     /**
      * Adds additional event spies to the controller/view event manager
@@ -50,26 +39,28 @@ class MailhideControllerTest extends TestCase
     {
         $this->cakeControllerSpy($event, $controller);
 
-        //See https://github.com/travis-ci/travis-ci/issues/6339
-        $this->_controller->Recaptcha->setConfig('httpClientOptions', ['adapter' => Stream::class]);
+        //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the
+        //  `Recaptcha` component and returs
+        if ($this->getName() === 'testDisplayMissingRecaptchaComponent') {
+            $this->_controller->components()->unload('Recaptcha');
+            unset($this->_controller->Recaptcha);
+
+            return;
+        }
 
         //Only for some test, it mocks the `Recaptcha` component, so the
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
             $this->_controller->Recaptcha = $this->getMockBuilder(get_class($this->_controller->Recaptcha))
-                ->setConstructorArgs([new ComponentRegistry($this->_controller), $this->_controller->Recaptcha->getConfig()])
+                ->setConstructorArgs([$this->_controller->components()])
                 ->setMethods(['verify'])
                 ->getMock();
 
             $this->_controller->Recaptcha->method('verify')->will($this->returnValue(true));
         }
 
-        //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the
-        //  `Recaptcha` component
-        if ($this->getName() === 'testDisplayMissingRecaptchaComponent') {
-            $this->_controller->components()->unload('Recaptcha');
-            unset($this->_controller->Recaptcha);
-        }
+        //See https://github.com/travis-ci/travis-ci/issues/6339
+        $this->_controller->Recaptcha->setConfig('httpClientOptions', ['adapter' => Stream::class]);
     }
 
     /**
@@ -88,18 +79,22 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplay()
     {
-        $mail = 'test@example.com';
-        $url = $this->getDisplayActionUrl($mail);
+        $url = $this->getDisplayActionUrl($this->example);
 
         foreach (['get', 'post'] as $method) {
             $this->{$method}($url);
             $this->assertResponseOk();
-            $this->assertResponseNotContains($mail);
+            $this->assertResponseNotContains($this->example);
 
             $this->{$method}($url, ['g-recaptcha-response' => 'foo']);
             $this->assertResponseOk();
-            $this->assertResponseNotContains($mail);
+            $this->assertResponseNotContains($this->example);
         }
+
+        //Missing mail on query
+        $this->get(['_name' => 'mailhide']);
+        $this->assertResponseError();
+        $this->assertResponseContains('Missing mail value');
     }
 
     /**
@@ -109,22 +104,9 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplayVerifyTrue()
     {
-        $mail = 'test@example.com';
-
-        $this->post($this->getDisplayActionUrl($mail), ['g-recaptcha-response' => 'foo']);
+        $this->post($this->getDisplayActionUrl($this->example), ['g-recaptcha-response' => 'foo']);
         $this->assertResponseOk();
-        $this->assertResponseContains($mail);
-    }
-
-    /**
-     * Test for `display()` method, missing mail on query
-     * @test
-     */
-    public function testDisplayMissingMailOnQuery()
-    {
-        $this->get(['_name' => 'mailhide']);
-        $this->assertResponseError();
-        $this->assertResponseContains('Missing mail value');
+        $this->assertResponseContains($this->example);
     }
 
     /**
@@ -133,9 +115,8 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplayInvalidMailValueOnQuery()
     {
-        $url = $this->getDisplayActionUrl('test@example.com');
+        $url = $this->getDisplayActionUrl($this->example);
         $url['?']['mail'] .= 'foo';
-
         $this->post($url, ['g-recaptcha-response' => 'foo']);
         $this->assertResponseError();
         $this->assertResponseContains('Invalid mail value');
@@ -147,7 +128,7 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplayMissingRecaptchaComponent()
     {
-        $this->get($this->getDisplayActionUrl('test@example.com'));
+        $this->get($this->getDisplayActionUrl($this->example));
         $this->assertResponseFailure();
         $this->assertResponseContains('Missing Recaptcha component');
     }
