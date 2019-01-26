@@ -12,18 +12,15 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 
-use Cake\TestSuite\TestCase;
 use Cake\View\View;
+use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
-use Tools\ReflectionTrait;
 
 /**
  * MailhideHelperTest class
  */
 class MailhideHelperTest extends TestCase
 {
-    use ReflectionTrait;
-
     /**
      * @var \RecaptchaMailhide\View\Helper\MailhideHelper
      */
@@ -36,8 +33,6 @@ class MailhideHelperTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
-        $this->loadPlugins(['RecaptchaMailhide']);
 
         $this->Mailhide = new MailhideHelper(new View);
     }

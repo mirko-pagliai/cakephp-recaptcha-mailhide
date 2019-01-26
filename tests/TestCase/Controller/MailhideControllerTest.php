@@ -13,8 +13,8 @@
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
 use Cake\Http\Client\Adapter\Stream;
-use Cake\TestSuite\IntegrationTestTrait;
-use Cake\TestSuite\TestCase;
+use MeTools\TestSuite\IntegrationTestTrait;
+use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
 /**
@@ -22,25 +22,12 @@ use RecaptchaMailhide\Utility\Security;
  */
 class MailhideControllerTest extends TestCase
 {
-    use IntegrationTestTrait {
-        IntegrationTestTrait::controllerSpy as cakeControllerSpy;
-    }
+    use IntegrationTestTrait;
 
     /**
      * @var string
      */
     protected $example = 'test@example.com';
-
-    /**
-     * Called before every test method
-     * @return void
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->loadPlugins(['RecaptchaMailhide']);
-    }
 
     /**
      * Adds additional event spies to the controller/view event manager
