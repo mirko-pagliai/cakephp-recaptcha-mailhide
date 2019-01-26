@@ -45,6 +45,9 @@ class MailhideControllerTest extends IntegrationTestCase
                 ->will($this->returnValue(true));
         }
 
+        //See https://github.com/travis-ci/travis-ci/issues/6339
+        $controller->Recaptcha->setConfig('httpClientOptions', ['adapter' => Stream::class]);
+
         //Only for the `testDisplayMissingRecaptchaComponent` test, unloads the
         //  `Recaptcha` component
         if ($this->getName() === 'testDisplayMissingRecaptchaComponent') {
