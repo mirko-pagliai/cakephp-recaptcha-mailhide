@@ -105,3 +105,7 @@ DispatcherFactory::add('Routing');
 DispatcherFactory::add('ControllerFactory');
 
 ini_set('intl.default_locale', 'en_US');
+
+if (class_exists('PHPUnit_Runner_Version')) {
+    class_alias('PHPUnit_Framework_Constraint', 'PHPUnit\Framework\Constraint\Constraint');
+}
