@@ -19,7 +19,9 @@ even a coffee is enough! Thank you.
 ## Installation
 You can install the plugin via composer:
 
-    $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide
+```bash
+$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide
+```
 
 **NOTE: the latest version available requires at least CakePHP 3.7**.
 
@@ -27,23 +29,45 @@ Instead, the [cakephp3.2](//github.com/mirko-pagliai/cakephp-recaptcha-mailhide/
 branch is compatible with CakePHP versions from 3.2 onwards.  
 In this case, you can install the package as well:
 
-    $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2
+*CakePHP 3.2:*
+
+```bash
+$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2 crabstudio/recaptcha:2.0.0
+```
+
+*CakePHP 3.3 and 3.4:*
+
+```bash
+$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2 crabstudio/recaptcha:2.0.5
+```
+
+*CakePHP 3.5 and 3.6:*
+
+```bash
+$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2
+```
     
 After installation, you have to edit `APP/config/bootstrap.php` to load the plugin:
 
-    Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
+```php
+Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
+```
 
 Remember, **you must first load** the *crabstudio/Recaptcha* plugin. For example:
 
-    Plugin::load('Recaptcha');
-    Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
+```php
+Plugin::load('Recaptcha');
+Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
+```
 
 For more information on how to load the plugin, please refer to the 
 [Cookbook](http://book.cakephp.org/3.0/en/plugins.html#loading-a-plugin).
 
 Then you also need to set up a key to encrypt/decrypt email addresses:
 
-    Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
+```php
+Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
+```
 
 ## Configuration
 First, you have to load the `Recaptcha` component provided by the
@@ -56,7 +80,9 @@ For more information on how to load the component, please refer to the
 
 Then, you have to load the `Mailhide` helper:
 
-    $this->loadHelper('RecaptchaMailhide.Mailhide');
+```php
+$this->loadHelper('RecaptchaMailhide.Mailhide');
+```
 
 For more information on how to load the helper, please refer to the 
 [Cookbook](https://book.cakephp.org/3.0/en/views/helpers.html#configuring-helpers).
@@ -65,7 +91,9 @@ For more information on how to load the helper, please refer to the
 You can now use the `link()` method provided by the `Mailhide` helper in your
 template files. Example:
 
-    echo $this->Mailhide->link('My mail', 'myname@mymail.com');
+```php
+echo $this->Mailhide->link('My mail', 'myname@mymail.com');
+```
 
 This will create a link. By clicking on the link, a popup will open and it will
 contain the reCAPTCHA control. If the check was filled in correctly, the clear
@@ -73,14 +101,18 @@ email will be shown.
 
 You can also use the email address as the title of the link. Example:
 
-    echo $this->Mailhide->link('myname@mymail.com', 'myname@mymail.com');
+```php
+echo $this->Mailhide->link('myname@mymail.com', 'myname@mymail.com');
+```
 
 In this case, the email will be obfuscated (*myn\*\*\*@mymail.com*) to be shown
 as the title of the link.
 
 The third parameter of the method can be used for link options. Example:
 
-    echo $this->Mailhide->link('My mail', 'myname@mymail.com', ['class' => 'my-custom-class']);
+```php
+echo $this->Mailhide->link('My mail', 'myname@mymail.com', ['class' => 'my-custom-class']);
+```
 
 ## Versioning
 For transparency and insight into our release cycle and to maintain backward 
