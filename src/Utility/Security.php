@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -23,12 +24,13 @@ class Security extends CakeSecurity
     /**
      * Decrypts and decodes an email address
      * @param string $mail Email address
-     * @param string $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string|null $key The 256 bit/32 byte key to use as a cipher key.
      * @param string|null $hmacSalt The salt to use for the HMAC process.
      *   Leave null to use value of Security::getSalt().
-     * @return string Decrypted email address
+     * @return string|null Decrypted email address. Any trailing null bytes will
+     *  be removed
      */
-    public static function decryptMail($mail, $key = null, $hmacSalt = null)
+    public static function decryptMail(string $mail, ?string $key = null, ?string $hmacSalt = null): ?string
     {
         return parent::decrypt(base64_decode($mail), $key ?: Configure::readOrFail('RecaptchaMailhide.encryptKey'), $hmacSalt);
     }
@@ -36,12 +38,12 @@ class Security extends CakeSecurity
     /**
      * Encrypts and encodes an email address
      * @param string $mail Email address
-     * @param string $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string|null $key The 256 bit/32 byte key to use as a cipher key.
      * @param string|null $hmacSalt The salt to use for the HMAC process.
      *   Leave null to use value of Security::getSalt().
      * @return string Encrypted email address
      */
-    public static function encryptMail($mail, $key = null, $hmacSalt = null)
+    public static function encryptMail(string $mail, ?string $key = null, ?string $hmacSalt = null): string
     {
         return base64_encode(parent::encrypt($mail, $key ?: Configure::readOrFail('RecaptchaMailhide.encryptKey'), $hmacSalt));
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -42,7 +43,7 @@ class MailhideHelperTest extends TestCase
      * @param string $title Link title
      * @return string
      */
-    protected function getOnClickRegex($title)
+    protected function getOnClickRegex(string $title): string
     {
         return sprintf(
             preg_quote('window.open(\'%s\',\'' . $title . '\',\'resizable,height=547,width=334\'); return false;', '/'),

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -29,7 +30,7 @@ class MailhideController extends AppController
      * @throws \Cake\Controller\Exception\MissingComponentException
      * @uses \RecaptchaMailhide\Utility\Security::decryptMail()
      */
-    public function display()
+    public function display(): void
     {
         $hasRecaptcha = $this->components()->has('Recaptcha');
         is_true_or_fail($hasRecaptcha, __d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'), MissingComponentException::class);
