@@ -10,6 +10,7 @@
  * @link        https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
+
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Utility\Security;
@@ -68,7 +69,7 @@ Configure::write('App', [
             APP . 'Template' . DS,
             ROOT . 'src' . DS . 'Template' . DS,
         ],
-    ]
+    ],
 ]);
 Configure::write('Session', ['defaults' => 'php']);
 
