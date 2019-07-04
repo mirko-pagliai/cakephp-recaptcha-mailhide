@@ -22,7 +22,7 @@ class Plugin extends BasePlugin
 {
     /**
      * Load all the application configuration and bootstrap logic
-     * @param PluginApplicationInterface $app The host application
+     * @param \Cake\Core\PluginApplicationInterface $app The host application
      * @return void
      * @since 1.2.2
      */

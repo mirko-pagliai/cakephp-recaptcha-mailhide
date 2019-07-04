@@ -12,6 +12,7 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\Controller;
 
+use Cake\Controller\Exception\MissingComponentException;
 use Cake\Http\Client\Adapter\Stream;
 use MeTools\TestSuite\IntegrationTestTrait;
 use MeTools\TestSuite\TestCase;
@@ -128,6 +129,8 @@ class MailhideControllerTest extends TestCase
      */
     public function testDisplayMissingRecaptchaComponent()
     {
+        $this->disableErrorHandlerMiddleware();
+        $this->expectException(MissingComponentException::class);
         $this->get($this->getDisplayActionUrl($this->example));
         $this->assertResponseFailure();
         $this->assertResponseContains('Missing Recaptcha component');
