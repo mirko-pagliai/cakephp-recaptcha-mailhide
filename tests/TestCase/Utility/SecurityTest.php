@@ -49,7 +49,7 @@ class SecurityTest extends TestCase
     public function testEncryptMail()
     {
         $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
-        $hmacSalt = Configure::read('Security.salt') . '01234';
+        $hmacSalt = Security::getSalt() . '01234';
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {
             $this->assertNotEmpty(Security::encryptMail($mail));
