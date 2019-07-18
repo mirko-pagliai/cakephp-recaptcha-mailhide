@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.3 branch
+### 1.3.2
+* little fixes.
+
 ### 1.3.1
 * requires `me-tools` package for dev;
 * updated for CakePHP 3.7.1 and `php-tools` 1.1.12.
