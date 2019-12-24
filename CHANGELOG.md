@@ -1,5 +1,9 @@
 # 1.x branch
 ## 1.3 branch
+### 1.3.3
+* little fixes;
+* added tests for lower dependencies.
+
 ### 1.3.2
 * little fixes.
 
