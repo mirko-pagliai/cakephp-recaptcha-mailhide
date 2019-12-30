@@ -5,22 +5,35 @@
     "type": "cakephp-plugin",
     "license": "MIT",
     "authors": [{
-        "name": "Mirko Pagliai",
-        "email": "mirko.pagliai@gmail.com"
-    }],
+            "name": "Mirko Pagliai",
+            "email": "mirko.pagliai@gmail.com"
+        }],
     "require": {
-        "php": ">=5.5.9",
-        "cakephp/cakephp": "^3.7.1",
-        "crabstudio/recaptcha": "^2.1.1",
-        "mirko-pagliai/php-tools": "^1.1.12"
+        "php": ">=7.2",
+        "cakephp/cakephp": "^4.0",
+        "ctlabvn/recaptcha": "dev-cake-4",
+        "mirko-pagliai/php-tools": "^1.3"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "^3.0",
-        "mirko-pagliai/me-tools": "^2.18.3",
-        "phpunit/phpunit": "^5.7.14|^6.0"
+        "cakephp/cakephp-codesniffer": "^4.0",
+        "mirko-pagliai/me-tools": "^2.19",
+        "phpunit/phpunit": "^8.0"
     },
+    "repositories": [{
+            "type": "package",
+            "package": {
+                "name": "ctlabvn/recaptcha",
+                "version": "dev-cake-4",
+                "source": {
+                    "url": "https://github.com/ctlabvn/recaptcha.git",
+                    "type": "git",
+                    "reference": "cake-4"
+                }
+            }
+        }],
     "autoload": {
         "psr-4": {
+            "Recaptcha\\": "vendor/ctlabvn/recaptcha/src/",
             "RecaptchaMailhide\\": "src"
         }
     },
