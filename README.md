@@ -4,14 +4,14 @@
 [![Build Status](https://api.travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide.svg?branch=master)](https://travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide)
 [![codecov](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide/branch/master/graph/badge.svg)](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide)
 [![Build status](https://ci.appveyor.com/api/projects/status/hal81mkbmwcmfbmi?svg=true)](https://ci.appveyor.com/project/mirko-pagliai/cakephp-recaptcha-mailhide)
-[![CodeFactor](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide/badge/cakephp4)](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide/overview/cakephp4)
+[![CodeFactor](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide/badge)](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide)
 
 *reCAPTCHA Mailhide* is a CakePHP plugin that allows you to hide email addresses
-using reCAPTCHA.  
+using reCAPTCHA.
 It works by using the [crabstudio/Recaptcha](https://github.com/crabstudio/Recaptcha)
 plugin, which must first be loaded and configured correctly.
 
-Did you like this plugin? Its development requires a lot of time for me.  
+Did you like this plugin? Its development requires a lot of time for me.
 Please consider the possibility of making [a donation](//paypal.me/mirkopagliai):
 even a coffee is enough! Thank you.
 
@@ -24,45 +24,25 @@ You can install the plugin via composer:
 $ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide
 ```
 
-**NOTE: the latest version available requires at least CakePHP 3.7**.
+**NOTE: the latest version available requires at least CakePHP 4**.
 
-Instead, the [cakephp3.2](//github.com/mirko-pagliai/cakephp-recaptcha-mailhide/tree/cakephp3.2)
-branch is compatible with CakePHP versions from 3.2 onwards.  
+Instead, the [cakephp3](//github.com/mirko-pagliai/cakephp-recaptcha-mailhide/tree/cakephp3)
+branch is compatible with all previous versions of CakePHP from version 3.6.
+This branch coincides with the current version of *cakephp-recaptcha-mailhide*.
+
 In this case, you can install the package as well:
-
-*CakePHP 3.2:*
-
 ```bash
-$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2 crabstudio/recaptcha:2.0.0
+$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3
 ```
 
-*CakePHP 3.3 and 3.4:*
+Then you have to load the plugin. For more information on how to load the plugin,
+please refer to the [Cookbook](//book.cakephp.org/4.0/en/plugins.html#loading-a-plugin).
 
+Simply, you can execute the shell command to enable the plugin:
 ```bash
-$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2 crabstudio/recaptcha:2.0.5
+bin/cake plugin load RecaptchaMailhide
 ```
-
-*CakePHP 3.5 and 3.6:*
-
-```bash
-$ composer require --prefer-dist mirko-pagliai/cakephp-recaptcha-mailhide:dev-cakephp3.2
-```
-    
-After installation, you have to edit `APP/config/bootstrap.php` to load the plugin:
-
-```php
-Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
-```
-
-Remember, **you must first load** the *crabstudio/Recaptcha* plugin. For example:
-
-```php
-Plugin::load('Recaptcha');
-Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true]);
-```
-
-For more information on how to load the plugin, please refer to the 
-[Cookbook](http://book.cakephp.org/3.0/en/plugins.html#loading-a-plugin).
+This would update your application's bootstrap method.
 
 Then you also need to set up a key to encrypt/decrypt email addresses:
 
@@ -72,11 +52,11 @@ Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt1234567890
 
 ## Configuration
 First, you have to load the `Recaptcha` component provided by the
-*crabstudio/Recaptcha* plugin, as described [here](https://github.com/crabstudio/Recaptcha#load-component-and-configure).  
+*crabstudio/Recaptcha* plugin, as described [here](https://github.com/crabstudio/Recaptcha#load-component-and-configure).
 The component **must be loaded** inside the `initialize()` method of your
 `AppController` class.
 
-For more information on how to load the component, please refer to the 
+For more information on how to load the component, please refer to the
 [Cookbook](https://book.cakephp.org/3.0/en/controllers/components.html#configuring-components).
 
 Then, you have to load the `Mailhide` helper:
@@ -85,7 +65,7 @@ Then, you have to load the `Mailhide` helper:
 $this->loadHelper('RecaptchaMailhide.Mailhide');
 ```
 
-For more information on how to load the helper, please refer to the 
+For more information on how to load the helper, please refer to the
 [Cookbook](https://book.cakephp.org/3.0/en/views/helpers.html#configuring-helpers).
 
 ## Usage
@@ -116,6 +96,6 @@ echo $this->Mailhide->link('My mail', 'myname@mymail.com', ['class' => 'my-custo
 ```
 
 ## Versioning
-For transparency and insight into our release cycle and to maintain backward 
-compatibility, *reCAPTCHA Mailhide* will be maintained under the 
+For transparency and insight into our release cycle and to maintain backward
+compatibility, *reCAPTCHA Mailhide* will be maintained under the
 [Semantic Versioning guidelines](http://semver.org).
