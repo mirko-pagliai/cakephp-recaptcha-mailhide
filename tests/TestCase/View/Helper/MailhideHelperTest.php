@@ -30,7 +30,7 @@ class MailhideHelperTest extends TestCase
      * Called before every test method
      * @return void
      */
-    public function setUp(): void
+    public function setUp()
     {
         parent::setUp();
 
