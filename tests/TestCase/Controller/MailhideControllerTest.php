@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -36,7 +37,7 @@ class MailhideControllerTest extends TestCase
      * @param \Cake\Controller\Controller|null $controller Controller instance
      * @return void
      */
-    public function controllerSpy($event, $controller = null)
+    public function controllerSpy($event, $controller = null): void
     {
         $this->cakeControllerSpy($event, $controller);
 
@@ -69,7 +70,7 @@ class MailhideControllerTest extends TestCase
      * @param string $mail
      * @return array
      */
-    protected function getDisplayActionUrl($mail)
+    protected function getDisplayActionUrl(string $mail): array
     {
         return ['_name' => 'mailhide', '?' => ['mail' => Security::encryptMail($mail)]];
     }

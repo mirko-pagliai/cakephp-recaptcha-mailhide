@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -13,6 +14,7 @@
 
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
+use Cake\Utility\Security;
 
 ini_set('intl.default_locale', 'en_US');
 date_default_timezone_set('UTC');
@@ -90,11 +92,9 @@ Cache::setConfig([
     ],
 ]);
 
+Security::setSalt('a-long-but-not-random-value');
 Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
-Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
 
 Configure::write('pluginsToLoad', ['RecaptchaMailhide']);
 
 $_SERVER['PHP_SELF'] = '/';
-
-loadPHPUnitAliases();

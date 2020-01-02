@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -32,10 +33,10 @@ class MailhideHelper extends Helper
      * @param string $mail Mail address
      * @return string
      */
-    protected function obfuscate($mail)
+    protected function obfuscate(string $mail): string
     {
         return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches) {
-            $lenght = floor(strlen($matches[1]) / 2);
+            $lenght = (int)floor(strlen($matches[1]) / 2);
             $name = substr($matches[1], 0, $lenght) . str_repeat('*', $lenght);
 
             return $name . $matches[2];
@@ -54,7 +55,7 @@ class MailhideHelper extends Helper
      * @uses \RecaptchaMailhide\Utility\Security::encryptMail()
      * @uses obfuscate()
      */
-    public function link($title, $mail, array $options = [])
+    public function link(string $title, string $mail, array $options = []): string
     {
         //Obfuscates the title, if the title is the email address
         $title = filter_var($title, FILTER_VALIDATE_EMAIL) ? $this->obfuscate($title) : $title;

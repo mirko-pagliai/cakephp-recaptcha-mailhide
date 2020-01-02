@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -26,10 +27,10 @@ class Plugin extends BasePlugin
      * @return void
      * @since 1.2.2
      */
-    public function bootstrap(PluginApplicationInterface $app)
+    public function bootstrap(PluginApplicationInterface $app): void
     {
         if (!$app->getPlugins()->has('Recaptcha')) {
-            $app->addPlugin('Recaptcha', ['path' => ROOT . DS . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
+            $app->addPlugin('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'ctlabvn' . DS . 'recaptcha' . DS]);
         }
 
         parent::bootstrap($app);

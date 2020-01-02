@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Cake\Event\Event;
@@ -13,7 +15,7 @@ class ErrorController extends AppController
      * Initialization hook method
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         $this->loadComponent('RequestHandler');
     }
@@ -21,7 +23,7 @@ class ErrorController extends AppController
     /**
      * beforeRender callback
      * @param \Cake\Event\Event $event Event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeRender(Event $event)
     {

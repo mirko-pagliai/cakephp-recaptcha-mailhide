@@ -4,4 +4,8 @@
     <file>.</file>
 
     <rule ref="./vendor/mirko-pagliai/php-tools/sniffer-ruleset.xml"/>
+
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse">
+        <exclude-pattern>/tests/test_app/Template/Error/error500.php</exclude-pattern>
+    </rule>
 </ruleset>
