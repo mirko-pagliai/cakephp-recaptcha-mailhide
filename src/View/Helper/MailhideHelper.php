@@ -35,8 +35,7 @@ class MailhideHelper extends Helper
     protected function obfuscate($mail)
     {
         return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches) {
-            $lenght = floor(strlen($matches[1]) / 2);
-
+            $lenght = (int)floor(strlen($matches[1]) / 2);
             $name = substr($matches[1], 0, $lenght) . str_repeat('*', $lenght);
 
             return $name . $matches[2];

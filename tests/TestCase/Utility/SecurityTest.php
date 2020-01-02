@@ -13,9 +13,12 @@
 namespace RecaptchaMailhide\Test\TestCase\Utility;
 
 use Cake\Core\Configure;
-use Cake\TestSuite\TestCase;
+use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\Utility\Security;
 
+/**
+ * SecurityTest class
+ */
 class SecurityTest extends TestCase
 {
     /**
@@ -24,21 +27,18 @@ class SecurityTest extends TestCase
      */
     public function testDecryptMail()
     {
-        $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey') . '01234';
+        $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
         $hmacSalt = Configure::read('Security.salt') . '01234';
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {
             $encrypted = Security::encryptMail($mail);
-            $decrypted = Security::decryptMail($encrypted);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted), $mail);
 
             $encrypted = Security::encryptMail($mail, $key);
-            $decrypted = Security::decryptMail($encrypted, $key);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted, $key), $mail);
 
             $encrypted = Security::encryptMail($mail, $key, $hmacSalt);
-            $decrypted = Security::decryptMail($encrypted, $key, $hmacSalt);
-            $this->assertEquals($decrypted, $mail);
+            $this->assertEquals(Security::decryptMail($encrypted, $key, $hmacSalt), $mail);
         }
     }
 
@@ -48,8 +48,8 @@ class SecurityTest extends TestCase
      */
     public function testEncryptMail()
     {
-        $key = Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey') . '01234';
-        $hmacSalt = Configure::read('Security.salt') . '01234';
+        $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
+        $hmacSalt = Security::getSalt() . '01234';
 
         foreach (['first@email.com', 'second@provider.com', 'example@myexample.com'] as $mail) {
             $this->assertNotEmpty(Security::encryptMail($mail));

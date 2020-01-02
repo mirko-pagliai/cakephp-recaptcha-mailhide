@@ -23,32 +23,27 @@ class Security extends CakeSecurity
     /**
      * Decrypts and decodes an email address
      * @param string $mail Email address
-     * @param string $key The 256 bit/32 byte key to use as a cipher key. Leave
-     *  `null` to use `Security.salt`
-     * @param string|null $hmacSalt The salt to use for the HMAC process. Leave
-     *  `null` to use `Security.salt`
-     * @return string Decrypted email address
+     * @param string|null $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string|null $hmacSalt The salt to use for the HMAC process.
+     *   Leave null to use value of Security::getSalt().
+     * @return string|null Decrypted email address. Any trailing null bytes will
+     *  be removed
      */
     public static function decryptMail($mail, $key = null, $hmacSalt = null)
     {
-        $key = $key ?: Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey');
-
-        return parent::decrypt(base64_decode($mail), $key, $hmacSalt);
+        return parent::decrypt(base64_decode($mail), $key ?: Configure::readOrFail('RecaptchaMailhide.encryptKey'), $hmacSalt);
     }
 
     /**
      * Encrypts and encodes an email address
      * @param string $mail Email address
-     * @param string $key The 256 bit/32 byte key to use as a cipher key. Leave
-     *  `null` to use `Security.salt`
-     * @param string|null $hmacSalt The salt to use for the HMAC process. Leave
-     *  `null` to use `Security.salt`
+     * @param string|null $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string|null $hmacSalt The salt to use for the HMAC process.
+     *   Leave null to use value of Security::getSalt().
      * @return string Encrypted email address
      */
     public static function encryptMail($mail, $key = null, $hmacSalt = null)
     {
-        $key = $key ?: Configure::read(RECAPTCHA_MAILHIDE . '.encryptKey');
-
-        return base64_encode(parent::encrypt($mail, $key, $hmacSalt));
+        return base64_encode(parent::encrypt($mail, $key ?: Configure::readOrFail('RecaptchaMailhide.encryptKey'), $hmacSalt));
     }
 }

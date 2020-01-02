@@ -13,8 +13,8 @@
 namespace RecaptchaMailhide\Controller;
 
 use App\Controller\AppController;
-use Cake\Network\Exception\BadRequestException;
-use Cake\Network\Exception\InternalErrorException;
+use Cake\Controller\Exception\MissingComponentException;
+use Cake\Http\Exception\BadRequestException;
 use RecaptchaMailhide\Utility\Security;
 
 /**
@@ -25,32 +25,24 @@ class MailhideController extends AppController
     /**
      * Display action
      * @return void
-     * @throws BadRequestException
-     * @throws InternalErrorException
+     * @throws \Cake\Http\Exception\BadRequestException
+     * @throws \Cake\Controller\Exception\MissingComponentException
      * @uses \RecaptchaMailhide\Utility\Security::decryptMail()
      */
     public function display()
     {
-        if (!$this->components()->has('Recaptcha')) {
-            throw new InternalErrorException(__d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'));
-        }
+        $hasRecaptcha = $this->components()->has('Recaptcha');
+        is_true_or_fail($hasRecaptcha, __d('recaptcha-mailhide', 'Missing {0} component', 'Recaptcha'), MissingComponentException::class);
 
-        $mail = $this->request->query('mail');
+        $mail = $this->getRequest()->getQuery('mail');
+        is_true_or_fail($mail, __d('recaptcha-mailhide', 'Missing mail value'), BadRequestException::class);
 
-        if (!$mail) {
-            throw new BadRequestException(__d('recaptcha-mailhide', 'Missing mail value'));
-        }
-
-        if ($this->request->is('post') && $this->Recaptcha->verify()) {
+        if ($this->getRequest()->is('post') && $this->Recaptcha->verify()) {
             $mail = Security::decryptMail($mail);
-
-            if (!$mail) {
-                throw new BadRequestException(__d('recaptcha-mailhide', 'Invalid mail value'));
-            }
-
+            is_true_or_fail($mail, __d('recaptcha-mailhide', 'Invalid mail value'), BadRequestException::class);
             $this->set(compact('mail'));
         }
 
-        $this->viewBuilder()->layout(RECAPTCHA_MAILHIDE . '.default');
+        $this->viewBuilder()->layout('RecaptchaMailhide.default');
     }
 }

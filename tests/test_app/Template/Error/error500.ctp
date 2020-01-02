@@ -1,5 +1,8 @@
 <?php
+declare(strict_types=1);
+
 use Cake\Core\Configure;
+
 ?>
 <h2><?= __d('cake', 'An Internal Error Has Occurred.') ?></h2>
 <p class="error">

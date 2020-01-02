@@ -12,45 +12,29 @@
  */
 namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 
-use Cake\TestSuite\TestCase;
 use Cake\View\View;
+use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
-use Tools\ReflectionTrait;
 
 /**
  * MailhideHelperTest class
  */
 class MailhideHelperTest extends TestCase
 {
-    use ReflectionTrait;
-
     /**
      * @var \RecaptchaMailhide\View\Helper\MailhideHelper
      */
     protected $Mailhide;
 
     /**
-     * Setup the test case, backup the static object values so they can be
-     * restored. Specifically backs up the contents of Configure and paths in
-     *  App if they have not already been backed up
+     * Called before every test method
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $this->Mailhide = new MailhideHelper(new View);
-    }
-
-    /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->Mailhide);
+        $this->Mailhide = new MailhideHelper(new View());
     }
 
     /**
@@ -114,7 +98,6 @@ class MailhideHelperTest extends TestCase
         ];
         $this->assertHtml($expected, $this->Mailhide->link('test@example.com', 'test@example.com'));
 
-        $result = $this->Mailhide->link('My address', 'test@example.com', ['class' => 'custom-class', 'title' => 'custom title']);
         $expected = [
             'a' => [
                 'href',
@@ -125,6 +108,7 @@ class MailhideHelperTest extends TestCase
             'My address',
             '/a',
         ];
+        $result = $this->Mailhide->link('My address', 'test@example.com', ['class' => 'custom-class', 'title' => 'custom title']);
         $this->assertHtml($expected, $result);
     }
 }

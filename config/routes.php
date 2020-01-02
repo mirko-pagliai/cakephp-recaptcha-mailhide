@@ -10,16 +10,16 @@
  * @link        https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
+
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
-use Cake\Routing\Route\DashedRoute;
 
-Router::plugin(RECAPTCHA_MAILHIDE, ['path' => '/'], function (RouteBuilder $routes) {
-    $routes->connect(
-        '/mailhide',
-        ['controller' => 'Mailhide', 'action' => 'display'],
-        ['_name' => 'mailhide']
-    );
-
-    $routes->fallbacks(DashedRoute::class);
+Router::plugin('RecaptchaMailhide', ['path' => '/'], function (RouteBuilder $routes) {
+    if (!$routes->nameExists('mailhide')) {
+        $routes->connect(
+            '/mailhide',
+            ['controller' => 'Mailhide', 'action' => 'display'],
+            ['_name' => 'mailhide']
+        );
+    }
 });

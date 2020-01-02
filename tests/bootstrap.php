@@ -10,12 +10,16 @@
  * @link        https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
+
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Routing\DispatcherFactory;
+use Cake\Utility\Security;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+ini_set('intl.default_locale', 'en_US');
+date_default_timezone_set('UTC');
+mb_internal_encoding('UTF-8');
 
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
@@ -32,27 +36,26 @@ define('APP', ROOT . 'tests' . DS . 'test_app' . DS);
 define('APP_DIR', 'test_app');
 define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', APP . 'webroot' . DS);
-define('TMP', sys_get_temp_dir() . DS);
+define('TMP', sys_get_temp_dir() . DS . 'cakephp-recaptcha-mailhide' . DS);
 define('CONFIG', APP . 'config' . DS);
-define('CACHE', TMP);
-define('LOGS', TMP);
+define('CACHE', TMP . 'cache');
+define('LOGS', TMP . 'logs');
 define('SESSIONS', TMP . 'sessions' . DS);
 
+@mkdir(TMP);
 @mkdir(LOGS);
 @mkdir(SESSIONS);
 @mkdir(CACHE);
 @mkdir(CACHE . 'views');
 @mkdir(CACHE . 'models');
 
-require CORE_PATH . 'config' . DS . 'bootstrap.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 //Disables deprecation warnings for CakePHP 3.6
-if (version_compare(Configure::version(), '3.6', '>=')) {
+//if (version_compare(Configure::version(), '3.6', '>=')) {
     error_reporting(E_ALL & ~E_USER_DEPRECATED);
-}
-
-date_default_timezone_set('UTC');
-mb_internal_encoding('UTF-8');
+//}
 
 Configure::write('debug', true);
 Configure::write('App', [
@@ -69,11 +72,14 @@ Configure::write('App', [
     'cssBaseUrl' => 'css/',
     'paths' => [
         'plugins' => [APP . 'Plugin' . DS],
-        'templates' => [APP . 'TestApp' . DS . 'Template' . DS],
-    ]
+        'templates' => [
+            APP . 'Template' . DS,
+            ROOT . 'src' . DS . 'Template' . DS,
+        ],
+    ],
 ]);
 
-Cache::config([
+Cache::setConfig([
     '_cake_core_' => [
         'engine' => 'File',
         'prefix' => 'cake_core_',
@@ -93,19 +99,21 @@ Cache::config([
 
 Configure::write('Session', ['defaults' => 'php']);
 
+Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
+Configure::write('Security.salt', 'a-long-but-not-random-value');
+if (method_exists(Security::class, 'setSalt')) {
+    Security::setSalt('a-long-but-not-random-value');
+}
+
 /**
  * Loads plugins
  */
-Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
-Configure::write('Security.salt', 'mailHideSecureKeyIfYouWantToEncryptData1234');
+
 Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
-
 DispatcherFactory::add('Routing');
 DispatcherFactory::add('ControllerFactory');
 
-ini_set('intl.default_locale', 'en_US');
-
-if (class_exists('PHPUnit_Runner_Version')) {
-    class_alias('PHPUnit_Framework_Constraint', 'PHPUnit\Framework\Constraint\Constraint');
+if (function_exists('loadPHPUnitAliases')) {
+    loadPHPUnitAliases();
 }

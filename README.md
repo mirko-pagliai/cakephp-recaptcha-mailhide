@@ -4,6 +4,7 @@
 [![Build Status](https://api.travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide.svg?branch=master)](https://travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide)
 [![codecov](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide/branch/master/graph/badge.svg)](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide)
 [![Build status](https://ci.appveyor.com/api/projects/status/hal81mkbmwcmfbmi?svg=true)](https://ci.appveyor.com/project/mirko-pagliai/cakephp-recaptcha-mailhide)
+[![CodeFactor](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide/badge/cakephp4)](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide/overview/cakephp4)
 
 *reCAPTCHA Mailhide* is a CakePHP plugin that allows you to hide email addresses
 using reCAPTCHA.  
