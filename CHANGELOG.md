@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.4 branch
+### 1.4.1
+* fixed bug that could prevent the plugin from loading.
+
 ### 1.4.0
 * updated for `cakephp` 4 and `phpunit` 8.
 
