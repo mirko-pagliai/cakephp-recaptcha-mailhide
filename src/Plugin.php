@@ -29,7 +29,7 @@ class Plugin extends BasePlugin
     public function bootstrap(PluginApplicationInterface $app)
     {
         if (!$app->getPlugins()->has('Recaptcha')) {
-            $app->addPlugin('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'ctlabvn' . DS . 'recaptcha' . DS]);
+            $app->addPlugin('Recaptcha', ['path' => ROOT . DS . 'vendor' . DS . 'ctlabvn' . DS . 'recaptcha' . DS]);
         }
 
         parent::bootstrap($app);

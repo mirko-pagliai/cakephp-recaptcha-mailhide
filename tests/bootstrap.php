@@ -53,9 +53,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 require_once CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 //Disables deprecation warnings for CakePHP 3.6
-//if (version_compare(Configure::version(), '3.6', '>=')) {
-    error_reporting(E_ALL & ~E_USER_DEPRECATED);
-//}
+error_reporting(E_ALL & ~E_USER_DEPRECATED);
 
 Configure::write('debug', true);
 Configure::write('App', [
@@ -71,6 +69,7 @@ Configure::write('App', [
     'jsBaseUrl' => 'js/',
     'cssBaseUrl' => 'css/',
     'paths' => [
+        'locales' => [ROOT . 'src' . DS . 'Locale' . DS],
         'plugins' => [APP . 'Plugin' . DS],
         'templates' => [
             APP . 'Template' . DS,
@@ -108,7 +107,6 @@ if (method_exists(Security::class, 'setSalt')) {
 /**
  * Loads plugins
  */
-
 Plugin::load('Recaptcha', ['path' => ROOT . 'vendor' . DS . 'crabstudio' . DS . 'recaptcha' . DS]);
 Plugin::load('RecaptchaMailhide', ['bootstrap' => true, 'routes' => true, 'path' => ROOT]);
 DispatcherFactory::add('Routing');
