@@ -16,17 +16,17 @@ declare(strict_types=1);
 <div id="recaptcha-form">
     <?php if (empty($mail)) : ?>
         <p class="small">
-            <?= __d('recaptcha-mailhide', 'Fill out the reCAPTCHA form to view the e-mail address') ?>
+            <?= __d('recaptcha_mailhide', 'Fill out the reCAPTCHA form to view the e-mail address') ?>
         </p>
 
         <?php
             echo $this->Form->create();
             echo $this->Recaptcha->display();
-            echo $this->Form->submit(__d('recaptcha-mailhide', 'Show me the email address'));
+            echo $this->Form->submit(__d('recaptcha_mailhide', 'Show me the email address'));
             echo $this->Form->end();
         ?>
     <?php else : ?>
-        <p><?= __d('recaptcha-mailhide', 'The email address you were looking for is:') ?></p>
+        <p><?= __d('recaptcha_mailhide', 'The email address you were looking for is:') ?></p>
         <p><?= $this->Html->link($mail, sprintf('mailto:%s', $mail)) ?></p>
     <?php endif; ?>
 </div>

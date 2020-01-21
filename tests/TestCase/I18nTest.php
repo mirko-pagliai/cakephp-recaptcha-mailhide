@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -28,7 +29,7 @@ class I18nTest extends TestCase
      */
     public function testI18nConstant()
     {
-        $translator = I18n::getTranslator('recaptcha-mailhide', 'it');
+        $translator = I18n::getTranslator('recaptcha_mailhide', 'it');
         $this->assertEquals('Valore mail mancante', $translator->translate('Missing mail value'));
     }
 }
