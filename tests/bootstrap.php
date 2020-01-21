@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of cakephp-recaptcha-mailhide.
  *
@@ -21,11 +22,6 @@ ini_set('intl.default_locale', 'en_US');
 date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
-if (!defined('DS')) {
-    define('DS', DIRECTORY_SEPARATOR);
-}
-
-// Path constants to a few helpful things.
 define('ROOT', dirname(__DIR__) . DS);
 define('VENDOR', ROOT . 'vendor' . DS);
 define('CAKE_CORE_INCLUDE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
@@ -41,7 +37,6 @@ define('CONFIG', APP . 'config' . DS);
 define('CACHE', TMP . 'cache');
 define('LOGS', TMP . 'logs');
 define('SESSIONS', TMP . 'sessions' . DS);
-
 @mkdir(TMP);
 @mkdir(LOGS);
 @mkdir(SESSIONS);
@@ -69,14 +64,21 @@ Configure::write('App', [
     'jsBaseUrl' => 'js/',
     'cssBaseUrl' => 'css/',
     'paths' => [
-        'locales' => [ROOT . 'src' . DS . 'Locale' . DS],
-        'plugins' => [APP . 'Plugin' . DS],
+//        'locales' => [ROOT . 'src' . DS . 'Locale' . DS],
+//        'plugins' => [APP . 'Plugin' . DS],
         'templates' => [
             APP . 'Template' . DS,
             ROOT . 'src' . DS . 'Template' . DS,
         ],
     ],
 ]);
+Configure::write('Session', ['defaults' => 'php']);
+Security::setSalt('a-long-but-not-random-value');
+if (method_exists(Security::class, 'setSalt')) {
+    Security::setSalt('a-long-but-not-random-value');
+}
+Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
+Configure::write('pluginsToLoad', ['RecaptchaMailhide']);
 
 Cache::setConfig([
     '_cake_core_' => [
@@ -84,25 +86,7 @@ Cache::setConfig([
         'prefix' => 'cake_core_',
         'serialize' => true,
     ],
-    '_cake_model_' => [
-        'engine' => 'File',
-        'prefix' => 'cake_model_',
-        'serialize' => true,
-    ],
-    'default' => [
-        'engine' => 'File',
-        'prefix' => 'default_',
-        'serialize' => true,
-    ],
 ]);
-
-Configure::write('Session', ['defaults' => 'php']);
-
-Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
-Configure::write('Security.salt', 'a-long-but-not-random-value');
-if (method_exists(Security::class, 'setSalt')) {
-    Security::setSalt('a-long-but-not-random-value');
-}
 
 /**
  * Loads plugins
@@ -115,3 +99,5 @@ DispatcherFactory::add('ControllerFactory');
 if (function_exists('loadPHPUnitAliases')) {
     loadPHPUnitAliases();
 }
+
+$_SERVER['PHP_SELF'] = '/';
