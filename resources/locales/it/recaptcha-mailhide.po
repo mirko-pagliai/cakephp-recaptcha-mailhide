@@ -1,5 +1,5 @@
 # LANGUAGE translation of cakephp-recaptcha-mailhide
-# Copyright 2017 Mirko Pagliai <mirko.pagliai@gmail.com>
+# Copyright Mirko Pagliai <mirko.pagliai@gmail.com>
 #
 msgid ""
 msgstr ""
