@@ -14,9 +14,9 @@ declare(strict_types=1);
  */
 
 use Cake\Routing\RouteBuilder;
-use Cake\Routing\Router;
 
-Router::plugin('RecaptchaMailhide', ['path' => '/'], function (RouteBuilder $routes) {
+/** @var \Cake\Routing\RouteBuilder $routes */
+$routes->plugin('RecaptchaMailhide', ['path' => '/'], function (RouteBuilder $routes) {
     if (!$routes->nameExists('mailhide')) {
         $routes->connect(
             '/mailhide',
