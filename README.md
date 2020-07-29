@@ -57,7 +57,7 @@ The component **must be loaded** inside the `initialize()` method of your
 `AppController` class.
 
 For more information on how to load the component, please refer to the
-[Cookbook](https://book.cakephp.org/3.0/en/controllers/components.html#configuring-components).
+[Cookbook](https://book.cakephp.org/4/en/controllers/components.html#configuring-components).
 
 Then, you have to load the `Mailhide` helper:
 
@@ -66,7 +66,7 @@ $this->loadHelper('RecaptchaMailhide.Mailhide');
 ```
 
 For more information on how to load the helper, please refer to the
-[Cookbook](https://book.cakephp.org/3.0/en/views/helpers.html#configuring-helpers).
+[Cookbook](https://book.cakephp.org/4/en/views/helpers.html#configuring-helpers).
 
 ## Usage
 You can now use the `link()` method provided by the `Mailhide` helper in your
