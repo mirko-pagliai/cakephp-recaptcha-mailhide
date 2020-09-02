@@ -18,6 +18,7 @@ use App\Controller\AppController;
 use Cake\Controller\Exception\MissingComponentException;
 use Cake\Http\Exception\BadRequestException;
 use RecaptchaMailhide\Utility\Security;
+use Tools\Exceptionist;
 
 /**
  * MailhideController
@@ -34,14 +35,14 @@ class MailhideController extends AppController
     public function display(): void
     {
         $hasRecaptcha = $this->components()->has('Recaptcha');
-        is_true_or_fail($hasRecaptcha, __d('recaptcha_mailhide', 'Missing {0} component', 'Recaptcha'), MissingComponentException::class);
+        Exceptionist::isTrue($hasRecaptcha, __d('recaptcha_mailhide', 'Missing {0} component', 'Recaptcha'), MissingComponentException::class);
 
         $mail = $this->getRequest()->getQuery('mail');
-        is_true_or_fail($mail, __d('recaptcha_mailhide', 'Missing mail value'), BadRequestException::class);
+        Exceptionist::isTrue($mail, __d('recaptcha_mailhide', 'Missing mail value'), BadRequestException::class);
 
         if ($this->getRequest()->is('post') && $this->Recaptcha->verify()) {
             $mail = Security::decryptMail($mail);
-            is_true_or_fail($mail, __d('recaptcha_mailhide', 'Invalid mail value'), BadRequestException::class);
+            Exceptionist::isTrue($mail, __d('recaptcha_mailhide', 'Invalid mail value'), BadRequestException::class);
             $this->set(compact('mail'));
         }
 
