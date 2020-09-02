@@ -9,7 +9,7 @@ class Application extends BaseApplication
 {
     public function bootstrap()
     {
-        $this->addPlugin(RecaptchaMailhide::class, ['routes' => false]);
+        $this->addPlugin(RecaptchaMailhide::class);
     }
 
     public function middleware($middlewareQueue)

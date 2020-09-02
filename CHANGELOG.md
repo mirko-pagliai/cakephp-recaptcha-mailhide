@@ -1,5 +1,11 @@
 # 1.x branch
 ## 1.4 branch
+### 1.4.4
+* updated for `php-tools` 1.4.1.
+
+### 1.4.3
+* updated for `ctlabvn/recaptcha` 3.0 and `mirko-pagliai/me-tools` 2.19.6.
+
 ### 1.4.2
 * little fixes;
 * fixed languages files and translations.
