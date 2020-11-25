@@ -1,7 +1,8 @@
 # 1.x branch
 ## 1.4 branch
 ### 1.4.5
-* updated for `php-tools` 1.4.5.
+* updated for `php-tools` 1.4.5;
+* added `phpstan`.
 
 ### 1.4.4
 * updated for `php-tools` 1.4.1.
