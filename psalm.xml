@@ -32,5 +32,11 @@
                 <file name="src/View/Helper/MailhideHelper.php" />
             </errorLevel>
         </NullableReturnStatement>
+
+        <FalsableReturnStatement>
+            <errorLevel type="suppress">
+                <file name="src/Utility/Security.php" />
+            </errorLevel>
+        </FalsableReturnStatement>
     </issueHandlers>
 </psalm>
