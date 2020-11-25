@@ -16,6 +16,7 @@ namespace RecaptchaMailhide;
 
 use Cake\Core\BasePlugin;
 use Cake\Core\PluginApplicationInterface;
+use Tools\Filesystem;
 
 /**
  * Plugin class
@@ -31,7 +32,8 @@ class Plugin extends BasePlugin
     public function bootstrap(PluginApplicationInterface $app): void
     {
         if (!$app->getPlugins()->has('Recaptcha')) {
-            $app->addPlugin('Recaptcha', ['path' => add_slash_term(ROOT) . 'vendor' . DS . 'ctlabvn' . DS . 'recaptcha' . DS]);
+            $path = (new Filesystem())->concatenate(ROOT, 'vendor', 'ctlabvn', 'recaptcha') . DS;
+            $app->addPlugin('Recaptcha', compact('path'));
         }
 
         parent::bootstrap($app);
