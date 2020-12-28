@@ -12,27 +12,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Controller/MailhideController.php:45
+#: ./Controller/MailhideController.php:45
 msgid "Missing {0} component"
 msgstr ""
 
-#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Controller/MailhideController.php:51
+#: ./Controller/MailhideController.php:51
 msgid "Missing mail value"
 msgstr ""
 
-#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Controller/MailhideController.php:58
+#: ./Controller/MailhideController.php:58
 msgid "Invalid mail value"
 msgstr ""
 
-#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Template/Mailhide/display.ctp:28
+#: ./Template/Mailhide/display.ctp:28
 msgid "Fill out the reCAPTCHA form to view the e-mail address"
 msgstr ""
 
-#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Template/Mailhide/display.ctp:34
+#: ./Template/Mailhide/display.ctp:34
 msgid "Show me the email address"
 msgstr ""
 
-#: /home/mirko/Libs/Plugins/cakephp-recaptcha-mailhide/src/Template/Mailhide/display.ctp:38
+#: ./Template/Mailhide/display.ctp:38
 msgid "The email address you were looking for is:"
 msgstr ""
 
