@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.2",
         "cakephp/cakephp": "^4.0",
-        "ctlabvn/recaptcha": "^3.0",
+        "crabstudio/recaptcha": "^3.0",
         "mirko-pagliai/php-tools": "^1.4.5"
     },
     "require-dev": {
@@ -21,20 +21,6 @@
         "mirko-pagliai/me-tools": "^2.19.6",
         "phpunit/phpunit": "^8.0"
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "ctlabvn/recaptcha",
-                "version": "3.0.0",
-                "source": {
-                    "url": "https://github.com/ctlabvn/recaptcha.git",
-                    "type": "git",
-                    "reference": "3.0.0"
-                }
-            }
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Recaptcha\\": "vendor/ctlabvn/recaptcha/src/",
