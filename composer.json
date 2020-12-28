@@ -40,7 +40,6 @@
             "@test",
             "@composer update",
             "@test",
-            "@stan-setup",
             "@stan"
         ],
         "cs-check": "phpcs --standard=phpcs.xml.dist",
@@ -50,6 +49,7 @@
         "phpstan": "phpstan.phar analyse",
         "psalm": "psalm.phar",
         "stan": [
+            "@stan-setup",
             "@phpstan",
             "@psalm"
         ],
