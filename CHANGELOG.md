@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.4 branch
+### 1.4.6
+* fixed for `crabstudio/recaptcha` package.
+
 ### 1.4.5
 * updated for `php-tools` 1.4.5;
 * added `phpstan`.
