@@ -28,6 +28,11 @@ class MailhideControllerTest extends TestCase
     use IntegrationTestTrait;
 
     /**
+     * @var \RecaptchaMailhide\Controller\MailhideController
+     */
+    protected $_controller;
+    
+    /**
      * @var string
      */
     protected $example = 'test@example.com';
