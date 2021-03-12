@@ -24,6 +24,11 @@ use RecaptchaMailhide\Utility\Security;
 class MailhideControllerTest extends IntegrationTestCase
 {
     /**
+     * @var \RecaptchaMailhide\Controller\MailhideController
+     */
+    protected $_controller;
+    
+    /**
      * @var string
      */
     protected $example = 'test@example.com';
