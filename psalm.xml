@@ -15,12 +15,6 @@
     </projectFiles>
 
     <issueHandlers>
-        <UndefinedThisPropertyFetch>
-            <errorLevel type="suppress">
-                <file name="src/Controller/MailhideController.php" />
-            </errorLevel>
-        </UndefinedThisPropertyFetch>
-
         <UndefinedInterfaceMethod>
             <errorLevel type="suppress">
                 <file name="src/Plugin.php" />

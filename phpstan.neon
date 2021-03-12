@@ -1,5 +1,5 @@
 parameters:
-    level: 6
+    level: 8
 
     paths:
         - config
@@ -17,10 +17,6 @@ parameters:
         -  tests/test_app/
 
     ignoreErrors:
-        -
-            message: '#^Access to an undefined property RecaptchaMailhide\\Controller\\MailhideController::\$Recaptcha\.$#'
-            path: src/Controller/MailhideController.php
-
         -
             message: '#^Call to an undefined method Cake\\Core\\PluginApplicationInterface::getPlugins\(\)\.$#'
             path: src/Plugin.php
