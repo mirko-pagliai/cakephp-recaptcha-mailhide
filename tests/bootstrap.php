@@ -47,7 +47,7 @@ define('SESSIONS', TMP . 'sessions' . DS);
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 require_once CORE_PATH . 'config' . DS . 'bootstrap.php';
 
-//Disables deprecation warnings for CakePHP 3.6
+//Disables deprecation warnings
 error_reporting(E_ALL & ~E_USER_DEPRECATED);
 
 Configure::write('debug', true);
