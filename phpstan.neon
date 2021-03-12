@@ -26,5 +26,13 @@ parameters:
             path: src/View/Helper/MailhideHelper.php
 
         -
+            message: '#does not accept PHPUnit\\Framework\\MockObject\\MockObject.$#'
+            path: tests/TestCase
+
+        -
             message: '#has no return typehint specified\.$#'
             path: tests/TestCase
+
+        -
+            message: '#^Cannot call method translate\(\) on Aura\\Intl\\TranslatorInterface\|null\.$#'
+            path: tests/TestCase/I18nTest.php
