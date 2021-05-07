@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^4.0",
-        "mirko-pagliai/me-tools": "^2.19.6",
+        "mirko-pagliai/me-tools": "^2.20",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
@@ -35,7 +35,8 @@
     "scripts": {
         "check": [
             "@cs-check",
-            "@test-lowest",
+            "@update-lowest",
+            "@test",
             "@composer update",
             "@test",
             "@stan"
@@ -52,9 +53,6 @@
             "@psalm"
         ],
         "stan-setup": "cp composer.json composer.backup && composer require --dev phpstan/phpstan:^0.12 psalm/phar:\"^3.18|^4\" && mv composer.backup composer.json",
-        "test-lowest": [
-            "@composer update --prefer-lowest",
-            "@test"
-        ]
+        "update-lowest": "@composer update --prefer-lowest"
     }
 }
