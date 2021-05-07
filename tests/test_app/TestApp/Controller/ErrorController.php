@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 
 class ErrorController extends AppController
 {
@@ -10,7 +10,7 @@ class ErrorController extends AppController
         $this->loadComponent('RequestHandler');
     }
 
-    public function beforeRender(Event $event)
+    public function beforeRender(EventInterface $event)
     {
         parent::beforeRender($event);
 

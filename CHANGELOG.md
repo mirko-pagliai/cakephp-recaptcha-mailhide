@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.4 branch
+### 1.4.7
+* ready for `php` 8.0.
+
 ### 1.4.6
 * fixed for `crabstudio/recaptcha` package.
 
