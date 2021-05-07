@@ -26,9 +26,5 @@ parameters:
             path: src/View/Helper/MailhideHelper.php
 
         -
-            message: '#^Access to an undefined property#'
-            path: tests/TestCase
-
-        -
             message: '#has no return typehint specified\.$#'
             path: tests/TestCase
