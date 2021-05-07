@@ -35,7 +35,7 @@ class MailhideHelperTest extends TestCase
     {
         parent::setUp();
 
-        $this->Mailhide = new MailhideHelper(new View());
+        $this->Mailhide = $this->Mailhide ?: new MailhideHelper(new View());
     }
 
     /**
