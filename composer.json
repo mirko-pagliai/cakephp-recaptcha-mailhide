@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^4.0",
-        "mirko-pagliai/me-tools": "^2.19.6",
+        "mirko-pagliai/me-tools": "^2.20",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
@@ -43,7 +43,7 @@
         ],
         "cs-check": "phpcs --standard=phpcs.xml.dist",
         "cs-fix": "phpcbf --standard=phpcs.xml.dist",
-        "test": "phpunit",
+        "test": "rm -f -r /tmp/cake* && phpunit",
         "coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=coverage",
         "phpstan": "phpstan.phar analyse",
         "psalm": "psalm.phar",
@@ -52,7 +52,7 @@
             "@phpstan",
             "@psalm"
         ],
-        "stan-setup": "cp composer.json composer.backup && composer require --dev phpstan/phpstan:^0.12 psalm/phar:^3.18 && mv composer.backup composer.json",
+        "stan-setup": "cp composer.json composer.backup && composer require --dev phpstan/phpstan:^0.12 psalm/phar:\"^3.18|^4\" && mv composer.backup composer.json",
         "update-lowest": "@composer update --prefer-lowest"
     }
 }

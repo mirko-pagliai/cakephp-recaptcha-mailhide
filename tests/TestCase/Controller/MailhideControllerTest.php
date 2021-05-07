@@ -28,6 +28,11 @@ class MailhideControllerTest extends TestCase
     use IntegrationTestTrait;
 
     /**
+     * @var \RecaptchaMailhide\Controller\MailhideController
+     */
+    protected $_controller;
+
+    /**
      * @var string
      */
     protected $example = 'test@example.com';
@@ -54,7 +59,7 @@ class MailhideControllerTest extends TestCase
         //Only for some test, it mocks the `Recaptcha` component, so the
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
-            $this->_controller->Recaptcha = $this->getMockBuilder(get_class($this->_controller->Recaptcha))
+            $this->_controller->Recaptcha = @$this->getMockBuilder(get_class($this->_controller->Recaptcha))
                 ->setConstructorArgs([$this->_controller->components()])
                 ->setMethods(['verify'])
                 ->getMock();

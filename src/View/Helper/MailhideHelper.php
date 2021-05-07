@@ -36,12 +36,12 @@ class MailhideHelper extends Helper
      */
     protected function obfuscate(string $mail): string
     {
-        return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches) {
+        return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches): string {
             $lenght = (int)floor(strlen($matches[1]) / 2);
             $name = substr($matches[1], 0, $lenght) . str_repeat('*', $lenght);
 
             return $name . $matches[2];
-        }, $mail);
+        }, $mail) ?: '';
     }
 
     /**
@@ -64,10 +64,9 @@ class MailhideHelper extends Helper
         $mail = Security::encryptMail($mail);
         $url = Router::url(['_name' => 'mailhide', '?' => compact('mail')], true);
 
-        $options['escape'] = false;
         $options['onClick'] = sprintf('window.open(\'%s\',\'%s\',\'resizable,height=547,width=334\'); return false;', $url, $title);
         $options += ['class' => 'recaptcha-mailhide', 'title' => $title];
 
-        return $this->Html->link($title, $url, $options);
+        return $this->Html->link($title, $url, ['escape' => false] + $options);
     }
 }
