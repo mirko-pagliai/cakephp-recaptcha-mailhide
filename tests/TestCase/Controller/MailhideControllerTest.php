@@ -31,7 +31,7 @@ class MailhideControllerTest extends TestCase
      * @var \RecaptchaMailhide\Controller\MailhideController
      */
     protected $_controller;
-    
+
     /**
      * @var string
      */
