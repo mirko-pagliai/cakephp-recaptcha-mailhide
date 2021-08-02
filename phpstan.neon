@@ -24,7 +24,3 @@ parameters:
         -
             message: '#^Access to an undefined property RecaptchaMailhide\\View\\Helper\\MailhideHelper::\$Html\.$#'
             path: src/View/Helper/MailhideHelper.php
-
-        -
-            message: '#has no return typehint specified\.$#'
-            path: tests/TestCase

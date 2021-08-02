@@ -85,7 +85,7 @@ class MailhideControllerTest extends TestCase
      * Test for `display()` method
      * @test
      */
-    public function testDisplay()
+    public function testDisplay(): void
     {
         $url = $this->getDisplayActionUrl($this->example);
 
@@ -110,7 +110,7 @@ class MailhideControllerTest extends TestCase
      *  success
      * @test
      */
-    public function testDisplayVerifyTrue()
+    public function testDisplayVerifyTrue(): void
     {
         $this->post($this->getDisplayActionUrl($this->example), ['g-recaptcha-response' => 'foo']);
         $this->assertResponseOk();
@@ -121,7 +121,7 @@ class MailhideControllerTest extends TestCase
      * Test for `display()` method, with an invalid mail value on query
      * @test
      */
-    public function testDisplayInvalidMailValueOnQuery()
+    public function testDisplayInvalidMailValueOnQuery(): void
     {
         $url = $this->getDisplayActionUrl($this->example);
         $url['?']['mail'] .= 'foo';
@@ -134,7 +134,7 @@ class MailhideControllerTest extends TestCase
      * Test for `display()` method, missing `Recaptcha` component
      * @test
      */
-    public function testDisplayMissingRecaptchaComponent()
+    public function testDisplayMissingRecaptchaComponent(): void
     {
         $this->disableErrorHandlerMiddleware();
         $this->expectException(MissingComponentException::class);

@@ -58,7 +58,7 @@ class MailhideHelperTest extends TestCase
      * Test for `obfuscate()` method
      * @test
      */
-    public function testObfuscate()
+    public function testObfuscate(): void
     {
         foreach ([
             'myname@mymail.com' => 'myn***@mymail.com',
@@ -74,7 +74,7 @@ class MailhideHelperTest extends TestCase
      * Test for `link()` method
      * @test
      */
-    public function testLink()
+    public function testLink(): void
     {
         $expected = [
             'a' => [
