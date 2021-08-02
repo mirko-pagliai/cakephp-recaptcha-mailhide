@@ -59,12 +59,15 @@ class MailhideControllerTest extends TestCase
         //Only for some test, it mocks the `Recaptcha` component, so the
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
-            $this->_controller->Recaptcha = @$this->getMockBuilder(get_class($this->_controller->Recaptcha))
+            /** @var \Recaptcha\Controller\Component\RecaptchaComponent&\PHPUnit\Framework\MockObject\MockObject $Recaptcha */
+            $Recaptcha = @$this->getMockBuilder(get_class($this->_controller->Recaptcha))
                 ->setConstructorArgs([$this->_controller->components()])
                 ->setMethods(['verify'])
                 ->getMock();
 
-            $this->_controller->Recaptcha->method('verify')->will($this->returnValue(true));
+            $Recaptcha->method('verify')->will($this->returnValue(true));
+
+            $this->_controller->Recaptcha = $Recaptcha;
         }
 
         //See https://github.com/travis-ci/travis-ci/issues/6339

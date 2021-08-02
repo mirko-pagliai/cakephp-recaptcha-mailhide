@@ -20,6 +20,7 @@ use RecaptchaMailhide\Utility\Security;
 
 /**
  * MailhideHelper
+ * @property \Cake\View\Helper\HtmlHelper $Html
  */
 class MailhideHelper extends Helper
 {
