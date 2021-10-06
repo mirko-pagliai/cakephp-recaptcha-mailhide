@@ -1,9 +1,9 @@
 # reCAPTCHA Mailhide
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
-[![Build Status](https://api.travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide.svg?branch=master)](https://travis-ci.org/mirko-pagliai/cakephp-recaptcha-mailhide)
+[![CI](https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide/actions/workflows/ci.yml/badge.svg)](https://github.com/mirko-pagliai/cakephp-recaptcha-mailhide/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide/branch/master/graph/badge.svg)](https://codecov.io/gh/mirko-pagliai/cakephp-recaptcha-mailhide)
-[![Build status](https://ci.appveyor.com/api/projects/status/hal81mkbmwcmfbmi?svg=true)](https://ci.appveyor.com/project/mirko-pagliai/cakephp-recaptcha-mailhide)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5ecfbd5b64c34df9a384ac39c4ae66e7)](https://www.codacy.com/gh/mirko-pagliai/cakephp-recaptcha-mailhide/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mirko-pagliai/cakephp-recaptcha-mailhide&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide/badge)](https://www.codefactor.io/repository/github/mirko-pagliai/cakephp-recaptcha-mailhide)
 
 *reCAPTCHA Mailhide* is a CakePHP plugin that allows you to hide email addresses
