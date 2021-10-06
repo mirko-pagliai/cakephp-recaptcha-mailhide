@@ -27,7 +27,7 @@ class I18nTest extends TestCase
      * Tests I18n translations
      * @test
      */
-    public function testI18nConstant()
+    public function testI18nConstant(): void
     {
         $translator = I18n::getTranslator('recaptcha_mailhide', 'it');
         $this->assertEquals('Valore mail mancante', $translator->translate('Missing mail value'));

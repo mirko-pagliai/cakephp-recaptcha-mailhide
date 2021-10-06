@@ -27,7 +27,7 @@ class SecurityTest extends TestCase
      * Test for `decryptMail()` method
      * @test
      */
-    public function testDecryptMail()
+    public function testDecryptMail(): void
     {
         $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
         $hmacSalt = Configure::read('Security.salt') . '01234';
@@ -48,7 +48,7 @@ class SecurityTest extends TestCase
      * Test for `encryptMail()` method
      * @test
      */
-    public function testEncryptMail()
+    public function testEncryptMail(): void
     {
         $key = Configure::read('RecaptchaMailhide.encryptKey') . '01234';
         $hmacSalt = Security::getSalt() . '01234';

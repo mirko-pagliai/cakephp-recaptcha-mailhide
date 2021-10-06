@@ -59,12 +59,15 @@ class MailhideControllerTest extends TestCase
         //Only for some test, it mocks the `Recaptcha` component, so the
         //  reCAPTCHA control returns a success
         if (in_array($this->getName(), ['testDisplayVerifyTrue', 'testDisplayInvalidMailValueOnQuery'])) {
-            $this->_controller->Recaptcha = @$this->getMockBuilder(get_class($this->_controller->Recaptcha))
+            /** @var \Recaptcha\Controller\Component\RecaptchaComponent&\PHPUnit\Framework\MockObject\MockObject $Recaptcha */
+            $Recaptcha = @$this->getMockBuilder(get_class($this->_controller->Recaptcha))
                 ->setConstructorArgs([$this->_controller->components()])
                 ->setMethods(['verify'])
                 ->getMock();
 
-            $this->_controller->Recaptcha->method('verify')->will($this->returnValue(true));
+            $Recaptcha->method('verify')->will($this->returnValue(true));
+
+            $this->_controller->Recaptcha = $Recaptcha;
         }
 
         //See https://github.com/travis-ci/travis-ci/issues/6339
@@ -85,7 +88,7 @@ class MailhideControllerTest extends TestCase
      * Test for `display()` method
      * @test
      */
-    public function testDisplay()
+    public function testDisplay(): void
     {
         $url = $this->getDisplayActionUrl($this->example);
 
@@ -110,7 +113,7 @@ class MailhideControllerTest extends TestCase
      *  success
      * @test
      */
-    public function testDisplayVerifyTrue()
+    public function testDisplayVerifyTrue(): void
     {
         $this->post($this->getDisplayActionUrl($this->example), ['g-recaptcha-response' => 'foo']);
         $this->assertResponseOk();
@@ -121,7 +124,7 @@ class MailhideControllerTest extends TestCase
      * Test for `display()` method, with an invalid mail value on query
      * @test
      */
-    public function testDisplayInvalidMailValueOnQuery()
+    public function testDisplayInvalidMailValueOnQuery(): void
     {
         $url = $this->getDisplayActionUrl($this->example);
         $url['?']['mail'] .= 'foo';
@@ -134,7 +137,7 @@ class MailhideControllerTest extends TestCase
      * Test for `display()` method, missing `Recaptcha` component
      * @test
      */
-    public function testDisplayMissingRecaptchaComponent()
+    public function testDisplayMissingRecaptchaComponent(): void
     {
         $this->disableErrorHandlerMiddleware();
         $this->expectException(MissingComponentException::class);

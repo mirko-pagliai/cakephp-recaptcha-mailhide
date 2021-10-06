@@ -1,3 +1,6 @@
+includes:
+    - phpstan-baseline.neon
+
 parameters:
     level: 8
 
@@ -15,16 +18,3 @@ parameters:
 
     excludes_analyse:
         -  tests/test_app/
-
-    ignoreErrors:
-        -
-            message: '#^Call to an undefined method Cake\\Core\\PluginApplicationInterface::getPlugins\(\)\.$#'
-            path: src/Plugin.php
-
-        -
-            message: '#^Access to an undefined property RecaptchaMailhide\\View\\Helper\\MailhideHelper::\$Html\.$#'
-            path: src/View/Helper/MailhideHelper.php
-
-        -
-            message: '#has no return typehint specified\.$#'
-            path: tests/TestCase
