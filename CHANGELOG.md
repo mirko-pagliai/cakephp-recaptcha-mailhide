@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.4 branch
+### 1.4.9
+* ready for `cakephp` 4.3.
+
 ### 1.4.8
 * migration to github actions.
 
