@@ -26,6 +26,6 @@ declare(strict_types=1);
 use Cake\Core\Configure;
 
 Configure::write('Error.ignoredDeprecationPaths', array_merge(
-    Configure::read('Error.ignoredDeprecationPaths', []),
+    (array)Configure::read('Error.ignoredDeprecationPaths', []),
     ['*/crabstudio/recaptcha/src/Controller/Component/RecaptchaComponent.php']
 ));

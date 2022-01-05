@@ -64,7 +64,6 @@ Configure::write('App', [
 Configure::write('Session', ['defaults' => 'php']);
 Security::setSalt('a-long-but-not-random-value');
 Configure::write('RecaptchaMailhide.encryptKey', 'thisIsAKeyForEncrypt12345678901234567890');
-Configure::write('pluginsToLoad', ['RecaptchaMailhide']);
 
 Cache::setConfig([
     '_cake_core_' => [
