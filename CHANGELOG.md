@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.4 branch
+### 1.4.11
+* added tests for PHP 8.1.
+
 ### 1.4.10
 * little fixes.
 
