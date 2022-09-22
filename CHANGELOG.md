@@ -1,7 +1,7 @@
 # 1.x branch
 ## 1.4 branch
 ### 1.4.12
-* requires at least PHP 7.4;
+* requires at least PHP 7.4 and CakePHP 4.2.11;
 * little fixes for `phpstan`, `psalm` and for the `composer.json` file.
 
 ### 1.4.11
