@@ -12,13 +12,13 @@
     ],
     "require": {
         "php": ">=7.4",
-        "cakephp/cakephp": "^4.2.11",
-        "crabstudio/recaptcha": "^3.0",
-        "mirko-pagliai/php-tools": "^1.4.5"
+        "cakephp/cakephp": "~4.3",
+        "crabstudio/recaptcha": "~3.0.1",
+        "mirko-pagliai/php-tools": "~1.7.1"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^4.0",
-        "mirko-pagliai/me-tools": "^2.20",
+        "mirko-pagliai/me-tools": "~2.21",
         "phpunit/phpunit": "^9.1|^9.5",
         "phpstan/phpstan": "^1.7",
         "psalm/phar": "^4.24"

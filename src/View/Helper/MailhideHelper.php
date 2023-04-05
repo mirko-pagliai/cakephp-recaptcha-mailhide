@@ -38,23 +38,19 @@ class MailhideHelper extends Helper
     protected function obfuscate(string $mail): string
     {
         return preg_replace_callback('/^([^@]+)(.*)$/', function ($matches): string {
-            $lenght = (int)floor(strlen($matches[1]) / 2);
-            $name = substr($matches[1], 0, $lenght) . str_repeat('*', $lenght);
+            $length = (int)floor(strlen($matches[1]) / 2);
+            $name = substr($matches[1], 0, $length) . str_repeat('*', $length);
 
             return $name . $matches[2];
         }, $mail) ?: '';
     }
 
     /**
-     * Creates a link for the page where you enter the code and from which the
-     *  clear email address will be displayed
-     * @param string $title Link title. If it is the email address, it will be
-     *  obfuscated
-     * @param string $mail Email for which you want to create the link. It
-     *  will not be shown clearly
+     * Creates a link for the page where you enter the code and from which the clear email address will be displayed
+     * @param string $title Link title. If it is the email address, it will be obfuscated
+     * @param string $mail Email for which you want to create the link. It will not be shown clearly
      * @param array $options Array of options and HTML attributes
      * @return string An `<a />` element
-     * @uses \RecaptchaMailhide\Utility\Security::encryptMail()
      * @uses obfuscate()
      */
     public function link(string $title, string $mail, array $options = []): string

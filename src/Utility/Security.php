@@ -25,11 +25,9 @@ class Security extends CakeSecurity
     /**
      * Decrypts and decodes an email address
      * @param string $mail Email address
-     * @param string|null $key The 256 bit/32 byte key to use as a cipher key.
-     * @param string|null $hmacSalt The salt to use for the HMAC process.
-     *   Leave null to use value of Security::getSalt().
-     * @return string|null Decrypted email address. Any trailing null bytes will
-     *  be removed
+     * @param string|null $key The 256 bit/32 byte key to use as a cipher key
+     * @param string|null $hmacSalt The salt to use for the HMAC process. Leave null to use value of Security::getSalt()
+     * @return string|null Decrypted email address. Any trailing null bytes will be removed
      */
     public static function decryptMail(string $mail, ?string $key = null, ?string $hmacSalt = null): ?string
     {
@@ -39,9 +37,8 @@ class Security extends CakeSecurity
     /**
      * Encrypts and encodes an email address
      * @param string $mail Email address
-     * @param string|null $key The 256 bit/32 byte key to use as a cipher key.
-     * @param string|null $hmacSalt The salt to use for the HMAC process.
-     *   Leave null to use value of Security::getSalt().
+     * @param string|null $key The 256 bit/32 byte key to use as a cipher key
+     * @param string|null $hmacSalt The salt to use for the HMAC process. Leave null to use value of Security::getSalt()
      * @return string Encrypted email address
      */
     public static function encryptMail(string $mail, ?string $key = null, ?string $hmacSalt = null): string

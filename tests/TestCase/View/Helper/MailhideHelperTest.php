@@ -17,16 +17,19 @@ namespace RecaptchaMailhide\Test\TestCase\View\Helper;
 use Cake\View\View;
 use MeTools\TestSuite\TestCase;
 use RecaptchaMailhide\View\Helper\MailhideHelper;
+use Tools\TestSuite\ReflectionTrait;
 
 /**
  * MailhideHelperTest class
  */
 class MailhideHelperTest extends TestCase
 {
+    use ReflectionTrait;
+
     /**
      * @var \RecaptchaMailhide\View\Helper\MailhideHelper
      */
-    protected $Mailhide;
+    protected MailhideHelper $Mailhide;
 
     /**
      * Called before every test method
@@ -36,7 +39,7 @@ class MailhideHelperTest extends TestCase
     {
         parent::setUp();
 
-        $this->Mailhide = $this->Mailhide ?: new MailhideHelper(new View());
+        $this->Mailhide ??= new MailhideHelper(new View());
     }
 
     /**
@@ -55,8 +58,8 @@ class MailhideHelperTest extends TestCase
     }
 
     /**
-     * Test for `obfuscate()` method
      * @test
+     * @uses \RecaptchaMailhide\View\Helper\MailhideHelper::obfuscate()
      */
     public function testObfuscate(): void
     {
@@ -71,8 +74,8 @@ class MailhideHelperTest extends TestCase
     }
 
     /**
-     * Test for `link()` method
      * @test
+     * @uses \RecaptchaMailhide\View\Helper\MailhideHelper::link()
      */
     public function testLink(): void
     {
