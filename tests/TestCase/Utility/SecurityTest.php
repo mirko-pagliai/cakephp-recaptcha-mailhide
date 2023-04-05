@@ -24,8 +24,8 @@ use RecaptchaMailhide\Utility\Security;
 class SecurityTest extends TestCase
 {
     /**
-     * Test for `decryptMail()` method
      * @test
+     * @uses \RecaptchaMailhide\Utility\Security::decryptMail()
      */
     public function testDecryptMail(): void
     {
@@ -45,8 +45,8 @@ class SecurityTest extends TestCase
     }
 
     /**
-     * Test for `encryptMail()` method
      * @test
+     * @uses \RecaptchaMailhide\Utility\Security::encryptMail()
      */
     public function testEncryptMail(): void
     {
